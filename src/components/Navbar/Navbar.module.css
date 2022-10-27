@@ -1,0 +1,42 @@
+.nav {
+    grid-area: n;
+    background-color: blueviolet;
+    padding: 20px;
+
+}
+
+.item a {
+    color:white;
+    text-decoration: none ;
+}
+
+.item a.active {
+    color: red;
+}
+.friends a {
+    font-size: 20px;
+    color: white;
+    margin-top: 10px;
+    text-decoration: none;
+    display: flex;
+    ;
+}
+.friends{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.image{
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-around;
+}
+.image img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.sidebar {
+    display: flex;
+    justify-content: space-around;
+}
