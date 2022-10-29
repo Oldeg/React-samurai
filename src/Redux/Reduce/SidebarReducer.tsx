@@ -1,8 +1,12 @@
 import React from 'react';
 import {SideBarType} from "../../App";
-import {ActionsType} from "../State";
+import {ActionsType} from "../Store";
+let initialState = {
+    elements: [
+        {name: 'Sveta'}, {name: 'Victor'}, {name: 'Nikita'}]
+};
 
-const sidebarReducer = (state: SideBarType, action:ActionsType) => {
+export const sidebarReducer = (state: SideBarType = initialState, action:ActionsType) => {
     return state
 };
 

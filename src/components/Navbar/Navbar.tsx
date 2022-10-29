@@ -2,9 +2,10 @@ import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
 import {ElementsType, SideBarType} from '../../App';
+import {StoreContext} from "../../StoreContext";
 
 type NavbarType = {
-    sidebar: SideBarType
+    /*sidebar: SideBarType*/
 }
 const Navbar = (props: NavbarType) => {
     return (
@@ -32,9 +33,18 @@ const Navbar = (props: NavbarType) => {
                     <img src="https://i.iplsc.com/-/000AIAU0P13DKS7P-C122.jpg" alt="3"/>
                 </div>
                 <div className={s.sidebar}>
-                    <div>{props.sidebar.elements[0].name}</div>
-                    <div>{props.sidebar.elements[1].name}</div>
-                    <div>{props.sidebar.elements[2].name}</div>
+                    <StoreContext.Consumer>{
+                        (store) => {
+                            return <div>
+                                <div>{store.getState().sidebar.elements[0].name}</div>
+                                <div>{store.getState().sidebar.elements[1].name}</div>
+                                <div>{store.getState().sidebar.elements[2].name}</div>
+                            </div>
+                        }
+
+                    }
+                    </StoreContext.Consumer>
+
                 </div>
             </div>
 

@@ -3,12 +3,12 @@ import s from './Dialogs.module.css'
 import {DialogsItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
 import {MessagesPageType} from '../../App';
-import { sendMessage, updateNewMessageBody} from "../../Redux/Reduce/MessagesPageReducer";
-import {ActionsType} from "../../Redux/State";
+
 type DialogsPropsType = {
     messagePage: MessagesPageType
-    dispatch: (action: ActionsType) => void
+    sendMessage: () => void
     newMessageBody: string
+    onNewMessageChange: (value: string) => void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -19,11 +19,10 @@ export const Dialogs = (props: DialogsPropsType) => {
                                                                                id={mess.id}/></div>)
 
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewMessageBody(e.currentTarget.value))
+        props.onNewMessageChange(e.currentTarget.value)
     }
     const onSendMessageClick = () => {
-        props.dispatch(sendMessage())
-
+        props.sendMessage()
 
     }
     return (
