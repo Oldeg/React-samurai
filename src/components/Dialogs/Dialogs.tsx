@@ -2,14 +2,10 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {DialogsItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
-import {MessagesPageType} from '../../App';
 
-type DialogsPropsType = {
-    messagePage: MessagesPageType
-    sendMessage: () => void
-    newMessageBody: string
-    onNewMessageChange: (value: string) => void
-}
+import {DialogsPropsType} from "./DialogsContainer";
+
+
 
 export const Dialogs = (props: DialogsPropsType) => {
 

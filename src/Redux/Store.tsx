@@ -1,21 +1,50 @@
 import {v1} from 'uuid';
-import {StateType} from '../App';
-import messagesPageReducer, {sendMessage, updateNewMessageBody} from "./Reduce/MessagesPageReducer";
-import profilePageReducer, {addPostActionCreator, changeNewTextActionCreator} from "./Reduce/ProfilePageReducer";
-import sidebarReducer from "./Reduce/SidebarReducer";
 
-export type StoreType = {
+
+type SideBarType = {
+    elements: Array<ElementsType>
+
+}
+type ElementsType = {
+    name: string
+}
+ type StoreType = {
     _state: StateType
     _callsubscriber: () => void
     subscribe: (observer: () => void) => void
     getState: () => StateType
-    dispatch: (action: ActionsType) => void
+
 }
-export type ActionsType =
-    ReturnType<typeof updateNewMessageBody> |
-    ReturnType<typeof sendMessage> |
-    ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof changeNewTextActionCreator>
+type StateType = {
+    profilePage: ProfilePageType
+    messagesPage: MessagesPageType
+    sidebar: SideBarType
+}
+type MessagesPageType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessagesType>
+    newMessageBody: string
+}
+type MessagesType = {
+    id: string
+    message: string
+}
+type DialogsType = {
+    id: string
+    name: string
+}
+type ProfilePageType = {
+    posts: Array<PostsType>
+    newPostText: string
+}
+
+type PostsType = {
+    id: string
+    post: string
+    like: number
+
+}
+
 let store: StoreType = {
     _state: {
         profilePage: {
@@ -64,14 +93,7 @@ let store: StoreType = {
     getState() {
         return this._state
     },
-    dispatch(action) {
 
-        this._state.profilePage = profilePageReducer(this._state.profilePage, action)
-        this._state.messagesPage = messagesPageReducer(this._state.messagesPage, action)
-        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
-        this._callsubscriber();
-
-    }
 }
 export default store;
 

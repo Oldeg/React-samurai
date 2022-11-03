@@ -1,9 +1,22 @@
 import React from 'react';
 import {v1} from "uuid";
-import {MessagesPageType} from "../../App";
-import {ActionsType} from "../Store";
 
-let initialState = {
+type DialogsType = {
+    id: string
+    name: string
+}
+type MessagesType = {
+    id: string
+    message: string
+
+
+}
+export type InitialStateMessagesPageReducerType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessagesType>
+    newMessageBody: string
+}
+let initialState:InitialStateMessagesPageReducerType = {
     dialogs: [
         {id: v1(), name: 'Dimych'},
         {id: v1(), name: 'Victor'},
@@ -23,25 +36,25 @@ let initialState = {
     newMessageBody: ''
 };
 
-export const messagesPageReducer = (state:MessagesPageType = initialState , action: ActionsType) => {
+export const messagesPageReducer = (state:InitialStateMessagesPageReducerType = initialState , action:ActionsType ):InitialStateMessagesPageReducerType => {
     switch(action.type){
         case 'UPDATE-NEW-MESSAGE-BODY' :
-            state.newMessageBody = action.newMessageBody
-            return state
+            return {...state, newMessageBody: action.newMessageBody}
         case 'SEND-MESSAGE' :
-            state.messages.push({id: v1(), message: state.newMessageBody},)
-            state.newMessageBody = '';
-            return state
+            return {...state, messages: [...state.messages,{id: v1(), message: state.newMessageBody}], newMessageBody: ''}
     }
     return state
 };
-export const updateNewMessageBody = (newMessageBody: string) => {
+export type ActionsType = UpdateNewMessageBodyACType |SendMessageACType
+type UpdateNewMessageBodyACType = ReturnType<typeof updateNewMessageBodyAC>
+type SendMessageACType = ReturnType<typeof sendMessageAC>
+export const updateNewMessageBodyAC = (newMessageBody: string) => {
     return {
         type: 'UPDATE-NEW-MESSAGE-BODY',
         newMessageBody: newMessageBody
     } as const
 }
-export const sendMessage = () => {
+export const sendMessageAC = () => {
     return {
         type: 'SEND-MESSAGE',
 

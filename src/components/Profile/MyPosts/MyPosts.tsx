@@ -1,15 +1,8 @@
 import React, {ChangeEvent,} from 'react';
 import Post from './Post/Post';
 import s from './MyPosts.module.css'
-import {PostsType} from '../../../App';
+import {MyPostsType} from "./MyPostsContainer";
 
-
-type MyPostsType = {
-    posts: Array<PostsType>
-    newPostText: string
-    updateNewPostText: (text: string) => void
-    addPost: () => void
-}
 const MyPosts = (props: MyPostsType) => {
 
     let postElements = props.posts.map(post => <Post key={post.id} post={post.post} like={post.like} id={post.id}/>)

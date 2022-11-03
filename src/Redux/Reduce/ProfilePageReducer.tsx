@@ -1,39 +1,47 @@
 import React from 'react';
-import { PostsType, ProfilePageType} from "../../App";
 import {v1} from "uuid";
-import {ActionsType} from "../Store";
 
-let initialState = {
-        posts: [
-            {id: v1(), post: 'Dog', like: 30},
-            {id: v1(), post: 'Cars', like: 20},
-            {id: v1(), post: 'Fruits', like: 34},
-            {id: v1(), post: 'Cinema', like: 10},
-            {id: v1(), post: 'Music', like: 14},
-            {id: v1(), post: 'City', like: 398},
-        ],
-        newPostText: ''
-    };
+type PostsType = {
+    id: string
+    post: string
+    like: number
 
-export const profilePageReducer = ( state: ProfilePageType = initialState , action: ActionsType) => {
+}
+export type InitialProfilePageReducerStateType = {
+    posts: PostsType[]
+    newPostText: string
+}
+export const initialState: InitialProfilePageReducerStateType = {
+    posts: [
+        {id: v1(), post: 'Dog', like: 30},
+        {id: v1(), post: 'Cars', like: 20},
+        {id: v1(), post: 'Fruits', like: 34},
+        {id: v1(), post: 'Cinema', like: 10},
+        {id: v1(), post: 'Music', like: 14},
+        {id: v1(), post: 'City', like: 398},
+    ],
+    newPostText: ''
+};
+
+export const profilePageReducer = (state: InitialProfilePageReducerStateType = initialState, action: ActionsType): InitialProfilePageReducerStateType => {
     switch (action.type) {
         case 'ADD-POST':
-            const newPost: PostsType = {id: v1(), post: state.newPostText, like: 0}
-            state.posts.push(newPost)
-            state.newPostText = '';
-            return state
+            return {...state, posts: [...state.posts, {id: v1(), post: state.newPostText, like: 0}], newPostText: ''}
         case 'UPDATE-NEW-POST-TEXT' :
-            state.newPostText = action.newText
-            return state
+
+            return {...state, newPostText: action.newText}
     }
     return state
 };
-export const addPostActionCreator = () => {
+type ActionsType = AddPostACType | ChangeNewTextACType
+type AddPostACType = ReturnType<typeof addPostAC>
+type ChangeNewTextACType = ReturnType<typeof changeNewTextAC>
+export const addPostAC = () => {
     return {
         type: 'ADD-POST',
     } as const
 }
-export const changeNewTextActionCreator = (newText: string) => {
+export const changeNewTextAC = (newText: string) => {
     return {
         type: 'UPDATE-NEW-POST-TEXT',
         newText: newText
