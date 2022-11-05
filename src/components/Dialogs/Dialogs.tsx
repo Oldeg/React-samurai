@@ -6,13 +6,12 @@ import {Message} from './Message/Message';
 import {DialogsPropsType} from "./DialogsContainer";
 
 
-
 export const Dialogs = (props: DialogsPropsType) => {
 
     let dialogsElements = props.messagePage.dialogs.map((dialog) => <DialogsItem key={dialog.id} name={dialog.name}
                                                                                  id={dialog.id}/>)
-    let messageElements = props.messagePage.messages.map(mess => <div><Message key={mess.id} text={mess.message}
-                                                                               id={mess.id}/></div>)
+    let messageElements = props.messagePage.messages.map(mess => <div key={mess.id}><Message text={mess.message}
+                                                                                             id={mess.id}/></div>)
 
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onNewMessageChange(e.currentTarget.value)

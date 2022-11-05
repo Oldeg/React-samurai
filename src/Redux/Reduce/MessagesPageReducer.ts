@@ -1,4 +1,3 @@
-import React from 'react';
 import {v1} from "uuid";
 
 type DialogsType = {
@@ -16,7 +15,7 @@ export type InitialStateMessagesPageReducerType = {
     messages: Array<MessagesType>
     newMessageBody: string
 }
-let initialState:InitialStateMessagesPageReducerType = {
+let initialState: InitialStateMessagesPageReducerType = {
     dialogs: [
         {id: v1(), name: 'Dimych'},
         {id: v1(), name: 'Victor'},
@@ -36,16 +35,20 @@ let initialState:InitialStateMessagesPageReducerType = {
     newMessageBody: ''
 };
 
-export const messagesPageReducer = (state:InitialStateMessagesPageReducerType = initialState , action:ActionsType ):InitialStateMessagesPageReducerType => {
-    switch(action.type){
+export const messagesPageReducer = (state: InitialStateMessagesPageReducerType = initialState, action: ActionsType): InitialStateMessagesPageReducerType => {
+    switch (action.type) {
         case 'UPDATE-NEW-MESSAGE-BODY' :
             return {...state, newMessageBody: action.newMessageBody}
         case 'SEND-MESSAGE' :
-            return {...state, messages: [...state.messages,{id: v1(), message: state.newMessageBody}], newMessageBody: ''}
+            return {
+                ...state,
+                messages: [...state.messages, {id: v1(), message: state.newMessageBody}],
+                newMessageBody: ''
+            }
     }
     return state
 };
-export type ActionsType = UpdateNewMessageBodyACType |SendMessageACType
+export type ActionsType = UpdateNewMessageBodyACType | SendMessageACType
 type UpdateNewMessageBodyACType = ReturnType<typeof updateNewMessageBodyAC>
 type SendMessageACType = ReturnType<typeof sendMessageAC>
 export const updateNewMessageBodyAC = (newMessageBody: string) => {
@@ -61,4 +64,4 @@ export const sendMessageAC = () => {
     } as const
 }
 
-export default  messagesPageReducer;
+export default messagesPageReducer;

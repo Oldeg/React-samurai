@@ -1,5 +1,3 @@
-import React from 'react';
-
 type ElementsType = {
     name: string
 }
