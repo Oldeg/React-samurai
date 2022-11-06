@@ -2,7 +2,7 @@ import React from 'react';
 import {
     addPostAC,
     changeNewTextAC
-} from "../../../Redux/Reduce/ProfilePageReducer";
+} from "../../../Redux/Reduce/profilePageReducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
