@@ -7,26 +7,30 @@ import axios from "axios";
 
 
 
+
 export const Users = (props: UsersPropsType) => {
-    if(props.users.length === 1){
+    if (props.users.length === 1) {
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
             props.setUsers(response.data.items)
         })
     }
-    return (
-        <div>
-            {props.users.map(u => <div key={u.id}>
+
+        return (
+            <div>
+
+                {props.users.map(u => <div key={u.id}>
                 <span>
                     <div className={s.imageBox}>
-                        {u.photos.small ? u.photos.small :  <img src={userPhoto}
-                            alt="avatar"/> }
+                        {u.photos.small ? u.photos.small : <img src={userPhoto}
+                                                                alt="avatar"/>}
 
                     </div>
                     <div>
-                        {u.followed ? <button onClick={() => props.unfollow(u.id)}>Unfollow</button> : <button onClick={() => props.follow(u.id)}>Follow</button> }
+                        {u.followed ? <button onClick={() => props.unfollow(u.id)}>Unfollow</button> :
+                            <button onClick={() => props.follow(u.id)}>Follow</button>}
                     </div>
                 </span>
-                <span className={s.message}>
+                    <span className={s.message}>
                     <span>
                         <div>
                             {u.name}
@@ -42,8 +46,9 @@ export const Users = (props: UsersPropsType) => {
 
 
                 </span>
-            </div>)}
-        </div>
-    );
-};
+                </div>)}
+            </div>
+        );
+    }
+
 

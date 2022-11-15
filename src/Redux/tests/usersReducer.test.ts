@@ -47,7 +47,10 @@ test('Property followed should be changed on true ', () => {
                 followed: false
             },
 
-        ]
+        ],
+        pageSize: 5,
+        totalCount: 0,
+        currentPage:1
     }
     expect(startState.items[1].followed).toBe(false)
     const endState = usersReducer(startState, followAC(2))
@@ -99,7 +102,10 @@ test('Property followed should be changed on false ', () => {
                 followed: false
             },
 
-        ]
+        ],
+        pageSize: 5,
+        totalCount: 0,
+        currentPage:1
 
     }
     expect(startState.items[0].followed).toBe(true)
@@ -175,7 +181,10 @@ test('Users should be added ', () => {
                 followed: false
             },
 
-        ]
+        ],
+        pageSize: 5,
+        totalCount: 0,
+        currentPage:1
     }
     expect(startState.items.length).toBe(4)
     const endState = usersReducer(startState, setUsersAC(arr))

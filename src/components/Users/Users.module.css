@@ -8,3 +8,18 @@
     height: 50px;
     background-color: azure;
 }
+.selected {
+    font-weight: bold;
+    color: khaki;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.pages{
+    margin-left: 5px;
+    cursor: pointer;
+
+}
+.pagesBox {
+    display: flex;
+    justify-content: center;
+}

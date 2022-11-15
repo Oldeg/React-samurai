@@ -1,7 +1,8 @@
-
-
 export type initialStateUsersType = {
     items: UserType[]
+    pageSize: number
+    totalCount: number
+    currentPage: number
 }
 export type UserType = {
     id: number
@@ -29,7 +30,10 @@ const initialState: initialStateUsersType = {
             followed: false
         }
 
-    ]
+    ],
+    pageSize: 5,
+    totalCount: 0,
+    currentPage: 3
 
 }
 
@@ -48,17 +52,25 @@ const usersReducer = (state: initialStateUsersType = initialState, action: Actio
             }
         }
         case 'SET_USERS': {
-            return {...state, items: [...state.items, ...action.payload.users]}
+            return {...state, items: action.payload.users}
+        }
+        case "SET_CURRENT_PAGE": {
+            return {...state, currentPage: action.payload.currentPage}
+        }
+        case "SET_TOTAL_USERS_COUNT": {
+            return {...state, totalCount: action.payload.totalCount}
         }
         default:
             return state
     }
 
 };
-export type ActionsType = FollowACType | UnFollowACType | setUsersACType
+export type ActionsType = FollowACType | UnFollowACType | setUsersACType | setCurrentPageACType | setTotalUsersCountACType
 type setUsersACType = ReturnType<typeof setUsersAC>
 type FollowACType = ReturnType<typeof followAC>
 type UnFollowACType = ReturnType<typeof unFollowAC>
+type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
+type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
 export const followAC = (userID: number) => {
     return {
         type: 'FOLLOW',
@@ -85,6 +97,22 @@ export const setUsersAC = (users: Array<UserType>) => {
         }
 
     } as const
+}
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: 'SET_CURRENT_PAGE',
+        payload: {
+            currentPage
+        }
+    } as const
+}
+export const setTotalUsersCountAC = (totalCount: number) => {
+    return {
+        type: 'SET_TOTAL_USERS_COUNT',
+        payload: {
+            totalCount
+        }
+    }as const
 }
 
 export default usersReducer;
