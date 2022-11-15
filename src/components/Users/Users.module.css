@@ -23,3 +23,12 @@
     display: flex;
     justify-content: center;
 }
+.preloader {
+    width: 100px;
+    height: 100px;
+    z-index: 2;
+    position: absolute;
+    top: 350px;
+    left: 750px;
+
+}
