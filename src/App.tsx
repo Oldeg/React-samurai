@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
-import Profile from './components/Profile/Profile';
+
 
 import {Route} from 'react-router-dom';
 import {News} from './components/News/News';
@@ -12,6 +12,7 @@ import {Friends} from './components/Friends/Friends';
 
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import {ProfileContainer1} from "./components/Profile/ProfileContainer";
 
 
 const App = () => {
@@ -23,8 +24,8 @@ const App = () => {
             <div className="app-wrapper-content">
                 <Route exact path="/dialogs"
                        render={() => <DialogsContainer/>}/>
-                <Route path="/profile"
-                       render={() => <Profile/>}/>
+                <Route path="/profile/:userId?"
+                       render={() => <ProfileContainer1/>}/>
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>
                 <Route path="/settings" render={() => <Settings/>}/>

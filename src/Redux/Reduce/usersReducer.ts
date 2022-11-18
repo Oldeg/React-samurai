@@ -60,8 +60,8 @@ const usersReducer = (state: initialStateUsersType = initialState, action: Actio
             return {...state, currentPage: action.payload.currentPage}
         }
         case "SET_TOTAL_USERS_COUNT": {
-            if(action.payload.totalCount > 50){
-                return {...state, totalCount: 50}
+            if(action.payload.totalCount > 100){
+                return {...state, totalCount: 80}
             }
             return {...state, totalCount: action.payload.totalCount}
         }
