@@ -39,7 +39,7 @@ const initialState: initialStateUsersType = {
 
 }
 
-const usersReducer = (state: initialStateUsersType = initialState, action: ActionsType): initialStateUsersType => {
+const usersReducer = (state = initialState, action: ActionsType): initialStateUsersType => {
     switch (action.type) {
         case 'FOLLOW' : {
             return {
