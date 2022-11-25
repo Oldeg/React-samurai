@@ -2,7 +2,7 @@ import React from 'react';
 import {
     addPost,
     changeNewText
-} from "../../../Redux/Reduce/profilePageReducer";
+} from "../../../Redux/Reducers/profilePageReducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";

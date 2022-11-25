@@ -2,7 +2,7 @@ import {v1} from "uuid";
 import  {
     InitialStateMessagesPageReducerType,
     messagesPageReducer, sendMessageAC, updateNewMessageBodyAC
-} from "../Reduce/messagesPageReducer";
+} from "../Reducers/messagesPageReducer";
 
 
 test('Message body should be updated', () => {

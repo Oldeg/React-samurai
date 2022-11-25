@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
-import {ProfileUserType} from "../../../Redux/Reduce/profilePageReducer";
+import {ProfileUserType} from "../../../Redux/Reducers/profilePageReducer";
 type ProfileInfoType ={
     profile: ProfileUserType
 }

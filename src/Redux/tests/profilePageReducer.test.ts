@@ -4,7 +4,7 @@ import {
     changeNewText,
     InitialProfilePageReducerStateType,
     profilePageReducer
-} from "../Reduce/profilePageReducer";
+} from "../Reducers/profilePageReducer";
 
 
 

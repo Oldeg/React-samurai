@@ -1,5 +1,5 @@
 
-import usersReducer, {follow, initialStateUsersType, setUsers, unFollow, UserType} from "../Reduce/usersReducer";
+import usersReducer, {follow, initialStateUsersType, setUsers, unFollow, UserType} from "../Reducers/usersReducer";
 
 test('Property followed should be changed on true ', () => {
 
@@ -51,7 +51,8 @@ test('Property followed should be changed on true ', () => {
         pageSize: 5,
         totalCount: 0,
         currentPage:1,
-        isFetchingValue: false
+        isFetchingValue: false,
+        followingInProgress: []
     }
     expect(startState.items[1].followed).toBe(false)
     const endState = usersReducer(startState, follow(2))
@@ -107,7 +108,8 @@ test('Property followed should be changed on false ', () => {
         pageSize: 5,
         totalCount: 0,
         currentPage:1,
-        isFetchingValue: false
+        isFetchingValue: false,
+        followingInProgress:[]
 
     }
     expect(startState.items[0].followed).toBe(true)
@@ -187,7 +189,8 @@ test('Users should be added ', () => {
         pageSize: 5,
         totalCount: 0,
         currentPage:1,
-        isFetchingValue: false
+        isFetchingValue: false,
+        followingInProgress: []
     }
     expect(startState.items.length).toBe(4)
     const endState = usersReducer(startState, setUsers(arr))

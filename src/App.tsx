@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header/Header';
+
 import Navbar from './components/Navbar/Navbar';
 
 
@@ -13,13 +13,15 @@ import {Friends} from './components/Friends/Friends';
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import {ProfileContainer1} from "./components/Profile/ProfileContainer";
+import {HeaderContainer1} from "./components/Header/HeaderContainer";
+
 
 
 const App = () => {
     return (
 
         <div className="app-wrapper">
-            <Header/>
+            <HeaderContainer1/>
             <Navbar/> {/*sidebar={props.store.getState().sidebar}*/}
             <div className="app-wrapper-content">
                 <Route exact path="/dialogs"
