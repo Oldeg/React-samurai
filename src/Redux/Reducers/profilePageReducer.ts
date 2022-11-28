@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {profileAPI} from "../../api/api";
 
 export type PostsType = {
     id: string
@@ -68,16 +70,17 @@ export const initialState: InitialProfilePageReducerStateType = {
 
 export const profilePageReducer = (state: InitialProfilePageReducerStateType = initialState, action: ActionsType): InitialProfilePageReducerStateType => {
     switch (action.type) {
-        case 'ADD-POST':{
+        case 'ADD-POST': {
             return {...state, posts: [...state.posts, {id: v1(), post: state.newPostText, like: 0}], newPostText: ''}
         }
-        case 'UPDATE-NEW-POST-TEXT' :{
+        case 'UPDATE-NEW-POST-TEXT' : {
             return {...state, newPostText: action.newText}
         }
         case 'SET_USER_PROFILE': {
             return {...state, profile: action.payload.userProfile}
         }
-        default: return state
+        default:
+            return state
     }
 
 };
@@ -96,7 +99,7 @@ export const changeNewText = (newText: string) => {
         newText: newText
     } as const
 }
-export const setUserProfile = (userProfile:ProfileUserType) => {
+export const setUserProfile = (userProfile: ProfileUserType) => {
     return {
         type: 'SET_USER_PROFILE',
         payload: {
@@ -104,6 +107,12 @@ export const setUserProfile = (userProfile:ProfileUserType) => {
         }
     } as const
 }
-
+export const getProfile = (id: string) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.getProfile(id).then(data => {
+            dispatch(setUserProfile(data))
+        })
+    }
+}
 
 export default profilePageReducer

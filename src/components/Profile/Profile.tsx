@@ -5,13 +5,15 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import { ProfileUserType} from "../../Redux/Reducers/profilePageReducer";
 
 
-type ProfilePropsType = {
 
+type ProfilePropsType = {
+    isAuth: boolean
     profile: ProfileUserType
 
 
 }
 const Profile = (props: ProfilePropsType) => {
+
     return (
         <div className={s.profile}>
             <div>

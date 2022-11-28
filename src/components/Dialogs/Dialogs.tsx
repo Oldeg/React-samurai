@@ -4,9 +4,10 @@ import {DialogsItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
 
 import {DialogsPropsType} from "./DialogsContainer";
+import {Redirect} from "react-router-dom";
 
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const  Dialogs = (props: DialogsPropsType) => {
 
     let dialogsElements = props.messagePage.dialogs.map((dialog) => <DialogsItem key={dialog.id} name={dialog.name}
                                                                                  id={dialog.id}/>)
@@ -19,6 +20,9 @@ export const Dialogs = (props: DialogsPropsType) => {
     const onSendMessageClick = () => {
         props.sendMessage()
 
+    }
+    if(!props.isAuth){
+        return <Redirect to={'/login'}/>
     }
     return (
         <div>
