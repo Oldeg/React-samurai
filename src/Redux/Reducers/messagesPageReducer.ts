@@ -49,15 +49,15 @@ export const messagesPageReducer = (state: InitialStateMessagesPageReducerType =
     return state
 };
 export type ActionsType = UpdateNewMessageBodyACType | SendMessageACType
-type UpdateNewMessageBodyACType = ReturnType<typeof updateNewMessageBodyAC>
-type SendMessageACType = ReturnType<typeof sendMessageAC>
-export const updateNewMessageBodyAC = (newMessageBody: string) => {
+type UpdateNewMessageBodyACType = ReturnType<typeof updateNewMessageBody>
+type SendMessageACType = ReturnType<typeof sendMessage>
+export const updateNewMessageBody = (newMessageBody: string) => {
     return {
         type: 'UPDATE-NEW-MESSAGE-BODY',
         newMessageBody: newMessageBody
     } as const
 }
-export const sendMessageAC = () => {
+export const sendMessage = () => {
     return {
         type: 'SEND-MESSAGE',
 

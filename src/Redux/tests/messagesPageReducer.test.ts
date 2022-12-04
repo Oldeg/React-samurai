@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import  {
     InitialStateMessagesPageReducerType,
-    messagesPageReducer, sendMessageAC, updateNewMessageBodyAC
+    messagesPageReducer, sendMessage, updateNewMessageBody
 } from "../Reducers/messagesPageReducer";
 
 
@@ -26,7 +26,7 @@ test('Message body should be updated', () => {
         newMessageBody: ''
     }
     expect(startState.newMessageBody).toBe('')
-    const endState = messagesPageReducer(startState, updateNewMessageBodyAC('Hello, what are you doing now?'))
+    const endState = messagesPageReducer(startState, updateNewMessageBody('Hello, what are you doing now?'))
 
     expect(endState.newMessageBody).toBe('Hello, what are you doing now?')
 
@@ -53,7 +53,7 @@ test('Message should be send', () => {
         newMessageBody: ''
     }
     expect(startState.newMessageBody).toBe('')
-    const endState = messagesPageReducer(startState, sendMessageAC())
+    const endState = messagesPageReducer(startState, sendMessage())
 
     expect(endState.messages.length).toBe(7)
     expect(endState.messages[6].message).toBe('')
