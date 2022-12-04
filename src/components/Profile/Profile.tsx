@@ -7,7 +7,6 @@ import { ProfileUserType} from "../../Redux/Reducers/profilePageReducer";
 
 
 type ProfilePropsType = {
-    isAuth: boolean
     profile: ProfileUserType
 
 
