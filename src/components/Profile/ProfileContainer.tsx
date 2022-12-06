@@ -4,8 +4,8 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
 import {
-    getProfile,
-    ProfileUserType,
+    getProfile, getUserStatus,
+    ProfileUserType, updateUserStatus,
 } from "../../Redux/Reducers/profilePageReducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
@@ -16,11 +16,12 @@ import {compose} from "redux";
 export type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToProps;
 type MapStateToPropsType = {
     profile: ProfileUserType
-
+    status: string
 }
 type MapDispatchToProps = {
     getProfile: (id: string) => void
-
+    getUserStatus: (userId: string) => void
+    updateUserStatus: (state:string) => void
 }
 type PathParamsType = {
     userId: string
@@ -36,9 +37,10 @@ export class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = '2'
+            userId = '26595'
         }
         this.props.getProfile(userId)
+        this.props.getUserStatus(userId)
     }
 
     render() {
@@ -54,11 +56,12 @@ export class ProfileContainer extends React.Component<PropsType> {
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
+        status: state.profilePage.status
 
     }
 }
 
 
-export const ProfileContainer1 = compose<React.ComponentType>(withAuthRedirect,connect(mapStateToProps, {getProfile}),withRouter)(ProfileContainer)
+export const ProfileContainer1 = compose<React.ComponentType>( connect(mapStateToProps, {getProfile,getUserStatus,updateUserStatus}), withRouter)(ProfileContainer)
 
 

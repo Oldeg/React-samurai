@@ -27,10 +27,18 @@ export const followingAPI = {
 },
 }
 export const profileAPI = {
-    getProfile:(id: string) => {
+    getProfile:(userId:string) => {
         return (
-            instance.get(`profile/${id}`).then(response => response.data)
+            instance.get(`profile/${userId}`).then(response => response.data)
         );
+
+    },
+    getUserStatus:(userId:string) => {
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateUserStatus: (status:string) => {
+        return instance.put(`profile/status`,{status:status})
+
     }
 }
 export const authAPI = {

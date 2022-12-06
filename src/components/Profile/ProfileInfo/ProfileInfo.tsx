@@ -1,30 +1,22 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import {ProfileUserType} from "../../../Redux/Reducers/profilePageReducer";
+import ProfileStatus from "./ProfileStatus";
 type ProfileInfoType ={
     profile: ProfileUserType
+    status: string
+    updateUserStatus: (status: string) => void
 }
 export const ProfileInfo = (props: ProfileInfoType) => {
+
     return (
         <div>
-            <div className={s.ava}>
-                <img
-                    src={props.profile.photos.large}
-                    alt="ava"/>
-            </div>
+
             <div className={s.descriptionBlock}>
-                <div>
-                    {props.profile.fullName}
-                </div>
-                <div>
-                    {props.profile.aboutMe}
-                </div>
-                <div>
-                    {props.profile.lookingForAJob}
-                </div>
-                <div>
-                    {props.profile.lookingForAJobDescription}
-                </div>
+                <img
+                    src={props.profile.photos.large} alt="ava"/>
+                <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
+
             </div>
         </div>
     )

@@ -28,12 +28,12 @@ export type ProfileUserType = {
     photos: {
         small: string, large: string
     }
-
 }
 export type InitialProfilePageReducerStateType = {
     posts: PostsType[]
     newPostText: string
     profile: ProfileUserType
+    status: string
 }
 export const initialState: InitialProfilePageReducerStateType = {
     posts: [
@@ -60,15 +60,17 @@ export const initialState: InitialProfilePageReducerStateType = {
         lookingForAJob: true,
         lookingForAJobDescription: "не ищу, а дурачусь",
         fullName: "samurai dimych",
-        userId: 2,
+        userId: 0,
         photos: {
             small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
             large: "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-        }
-    }
+        },
+
+    },
+    status: ''
 };
 
-export const profilePageReducer = (state: InitialProfilePageReducerStateType = initialState, action: ActionsType): InitialProfilePageReducerStateType => {
+export const profilePageReducer = (state = initialState, action: ActionsType): InitialProfilePageReducerStateType => {
     switch (action.type) {
         case 'ADD-POST': {
             return {...state, posts: [...state.posts, {id: v1(), post: state.newPostText, like: 0}], newPostText: ''}
@@ -79,15 +81,19 @@ export const profilePageReducer = (state: InitialProfilePageReducerStateType = i
         case 'SET_USER_PROFILE': {
             return {...state, profile: action.payload.userProfile}
         }
+        case 'SET_USER_STATUS': {
+            return {...state, status: action.payload.status}
+        }
         default:
             return state
     }
 
 };
-type ActionsType = AddPostACType | ChangeNewTextACType | setUserProfileACType
+type ActionsType = AddPostACType | ChangeNewTextACType | setUserProfileACType | setUserStatusType;
 type AddPostACType = ReturnType<typeof addPost>
 type ChangeNewTextACType = ReturnType<typeof changeNewText>
 type setUserProfileACType = ReturnType<typeof setUserProfile>
+type setUserStatusType = ReturnType<typeof setUserStatus>
 export const addPost = () => {
     return {
         type: 'ADD-POST',
@@ -107,6 +113,14 @@ export const setUserProfile = (userProfile: ProfileUserType) => {
         }
     } as const
 }
+export const setUserStatus = (status: string) => {
+    return {
+        type: 'SET_USER_STATUS',
+        payload: {
+            status
+        }
+    } as const
+}
 export const getProfile = (id: string) => {
     return (dispatch: Dispatch) => {
         profileAPI.getProfile(id).then(data => {
@@ -114,5 +128,22 @@ export const getProfile = (id: string) => {
         })
     }
 }
+export const getUserStatus = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.getUserStatus(userId).then(response => {
+            dispatch(setUserStatus(response.data))
+        })
+    }
+}
+export const updateUserStatus = (status: string) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.updateUserStatus(status).then(response => {
+            if(response.data.resultCode === 0){
+                dispatch(setUserStatus(status))
+            }
 
+
+        })
+    }
+}
 export default profilePageReducer

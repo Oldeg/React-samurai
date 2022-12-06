@@ -29,7 +29,8 @@ test('New post should be added', () => {
                 instagram: "instagra.com/sds",
                 youtube: null,
                 github: "github.com",
-                mainLink: null
+                mainLink: null,
+
             },
             lookingForAJob: true,
             lookingForAJobDescription: "не ищу, а дурачусь",
@@ -38,8 +39,10 @@ test('New post should be added', () => {
             photos: {
                 small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
                 large: "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-            }
-        }
+            },
+
+        },
+        status: ''
     };
     expect(startState.posts.length).toBe(6)
     const endState = profilePageReducer(startState, addPost())
@@ -79,8 +82,10 @@ test('Posts text should be updated', () => {
             photos: {
                 small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
                 large: "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-            }
-        }
+            },
+
+        },
+        status: ''
     };
 
     const endState = profilePageReducer(startState, changeNewText('Hey'))

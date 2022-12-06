@@ -8,8 +8,8 @@ import { ProfileUserType} from "../../Redux/Reducers/profilePageReducer";
 
 type ProfilePropsType = {
     profile: ProfileUserType
-
-
+    status: string
+    updateUserStatus: (status: string) => void
 }
 const Profile = (props: ProfilePropsType) => {
 
@@ -20,7 +20,7 @@ const Profile = (props: ProfilePropsType) => {
                     src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/Zugpsitze_mountain.jpg?crop=0%2C176%2C3008%2C1654&wid=4000&hei=2200&scl=0.752"
                     alt="nature"/>
             </div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus}/>
             <MyPostsContainer/>
         </div>
     );
