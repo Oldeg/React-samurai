@@ -1,11 +1,11 @@
 import {v1} from "uuid";
 import  {
     InitialStateMessagesPageReducerType,
-    messagesPageReducer, sendMessage, updateNewMessageBody
+    messagesPageReducer, sendMessage
 } from "../Reducers/messagesPageReducer";
 
 
-test('Message body should be updated', () => {
+/*test('Message body should be updated', () => {
     const startState: InitialStateMessagesPageReducerType = {
         dialogs: [
             {id: v1(), name: 'Dimych'},
@@ -23,7 +23,7 @@ test('Message body should be updated', () => {
             {id: v1(), message: 'All right'},
             {id: v1(), message: 'Cavabanga'},
         ],
-        newMessageBody: ''
+
     }
     expect(startState.newMessageBody).toBe('')
     const endState = messagesPageReducer(startState, updateNewMessageBody('Hello, what are you doing now?'))
@@ -31,7 +31,7 @@ test('Message body should be updated', () => {
     expect(endState.newMessageBody).toBe('Hello, what are you doing now?')
 
 
-})
+})*/
 test('Message should be send', () => {
     const startState: InitialStateMessagesPageReducerType = {
         dialogs: [
@@ -50,13 +50,11 @@ test('Message should be send', () => {
             {id: v1(), message: 'All right'},
             {id: v1(), message: 'Cavabanga'},
         ],
-        newMessageBody: ''
     }
-    expect(startState.newMessageBody).toBe('')
-    const endState = messagesPageReducer(startState, sendMessage())
+    const endState = messagesPageReducer(startState, sendMessage(''))
 
     expect(endState.messages.length).toBe(7)
     expect(endState.messages[6].message).toBe('')
-    expect(endState.newMessageBody).toBe('')
+
 
 })
