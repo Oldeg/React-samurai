@@ -11,7 +11,7 @@ type FormControlType = {
 
 
 }
-const FormControl: React.FC<FormControlType> = ({input, meta, children, ...props}) => {
+const FormControl: React.FC<FormControlType> = ({ meta, children}) => {
     const isError = meta.touched && meta.error
     return (
         <div className={s.formControl + ' ' + (isError ? s.error : '')}>

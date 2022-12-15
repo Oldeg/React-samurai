@@ -34,7 +34,7 @@ let initialState: InitialStateMessagesPageReducerType = {
     ]
 };
 
-export const messagesPageReducer = (state: InitialStateMessagesPageReducerType = initialState, action: ActionsType): InitialStateMessagesPageReducerType => {
+export const messagesPageReducer = (state: InitialStateMessagesPageReducerType = initialState, action: MessagesPageReducerType): InitialStateMessagesPageReducerType => {
     switch (action.type) {
 
         case 'SEND-MESSAGE' :
@@ -45,7 +45,7 @@ export const messagesPageReducer = (state: InitialStateMessagesPageReducerType =
     }
     return state
 };
-export type ActionsType =  SendMessageACType
+export type MessagesPageReducerType  =  SendMessageACType
 type SendMessageACType = ReturnType<typeof sendMessage>
 
 export const sendMessage = (value:string) => {

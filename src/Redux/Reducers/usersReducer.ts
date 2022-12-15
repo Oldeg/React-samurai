@@ -31,7 +31,7 @@ const initialState: initialStateUsersType = {
 
 }
 
-const usersReducer = (state = initialState, action: ActionsType): initialStateUsersType => {
+const usersReducer = (state = initialState, action: UsersReducerType): initialStateUsersType => {
     switch (action.type) {
         case 'FOLLOW' : {
             return {
@@ -72,7 +72,7 @@ const usersReducer = (state = initialState, action: ActionsType): initialStateUs
     }
 
 };
-export type ActionsType = FollowACType
+export type UsersReducerType = FollowACType
     | UnFollowACType
     | setUsersACType
     | setCurrentPageACType

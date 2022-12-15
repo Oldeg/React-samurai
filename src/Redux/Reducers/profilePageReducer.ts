@@ -68,7 +68,7 @@ export const initialState: InitialProfilePageReducerStateType = {
     status: ''
 };
 
-export const profilePageReducer = (state = initialState, action: ActionsType): InitialProfilePageReducerStateType => {
+export const profilePageReducer = (state = initialState, action: ProfilePageReducerType): InitialProfilePageReducerStateType => {
     switch (action.type) {
         case 'ADD-POST': {
             return {...state, posts: [...state.posts, {id: v1(), post: action.payload.value, like: Math.ceil(Math.random()*100)}]}
@@ -84,7 +84,7 @@ export const profilePageReducer = (state = initialState, action: ActionsType): I
     }
 
 };
-type ActionsType = AddPostACType | setUserProfileACType | setUserStatusType;
+export type ProfilePageReducerType = AddPostACType | setUserProfileACType | setUserStatusType;
 type AddPostACType = ReturnType<typeof addPost>
 type setUserProfileACType = ReturnType<typeof setUserProfile>
 type setUserStatusType = ReturnType<typeof setUserStatus>
