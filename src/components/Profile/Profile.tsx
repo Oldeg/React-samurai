@@ -6,7 +6,7 @@ import {ProfileUserType} from "../../Redux/Reducers/profilePageReducer";
 
 
 type ProfilePropsType = {
-    profile: ProfileUserType
+    profile: ProfileUserType | undefined
     status: string
     updateUserStatus: (status: string) => void
 }

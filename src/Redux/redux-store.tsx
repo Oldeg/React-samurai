@@ -7,6 +7,7 @@ import {authReducer, AuthReducerType} from "./Reducers/authReducer";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk'
 import {FormAction, reducer as formReducer} from "redux-form";
 import {useDispatch} from "react-redux";
+import {appReducer} from "./Reducers/appReducer";
 
 let rootReducer = combineReducers(
     {
@@ -14,6 +15,7 @@ let rootReducer = combineReducers(
         messagesPage: messagesPageReducer,
         usersPage: usersReducer,
         sidebar: sidebarReducer,
+        app: appReducer,
         auth: authReducer,
         form: formReducer
     })

@@ -19,6 +19,9 @@ const ProfilePostForm: React.FC<InjectedFormProps<PostFormType>> = (props) => {
             <span>
                 <button>Add post</button>
             </span>
+            <span>
+                <button>Remove post</button>
+            </span>
         </form>
 
     );

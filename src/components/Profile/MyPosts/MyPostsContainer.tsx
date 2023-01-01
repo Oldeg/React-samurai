@@ -24,11 +24,5 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 
 }
-/*const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
-    return {
-        addPost: () => {
-            dispatch(addPost())
-        }
-    }
-}*/
+
 export const MyPostsContainer = connect(mapStateToProps, {addPost})(MyPosts)

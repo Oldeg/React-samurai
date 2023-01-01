@@ -1,9 +1,8 @@
 
-import usersReducer, {followSuccess, initialStateUsersType, setUsers, unfollowSuccess, UserType} from "../Reducers/usersReducer";
-
-test('Property followed should be changed on true ', () => {
-
-    const startState: initialStateUsersType = {
+import usersReducer, {followUnfollow, InitialStateUsersType, setUsers,UserType} from "../Reducers/usersReducer";
+let startState:InitialStateUsersType
+beforeEach(() => {
+    startState = {
         items: [
             {
                 name: "Victor",
@@ -44,7 +43,7 @@ test('Property followed should be changed on true ', () => {
                     "large": null
                 },
                 status: null,
-                followed: false
+                followed: true
             },
 
         ],
@@ -54,67 +53,20 @@ test('Property followed should be changed on true ', () => {
         isFetchingValue: false,
         followingInProgress: []
     }
+})
+test('Property followed should be changed on true ', () => {
+
+
     expect(startState.items[1].followed).toBe(false)
-    const endState = usersReducer(startState, followSuccess(2))
+    const endState = usersReducer(startState, followUnfollow(2,true))
     expect(endState.items[1].followed).toBe(true)
 })
-test('Property followed should be changed on false ', () => {
+test('Property followed should be changed on false', () => {
 
-    const startState: initialStateUsersType = {
-        items: [
-            {
-                name: "Victor",
-                id: 1,
-                uniqueUrlName: null,
-                photos: {
-                    "small": null,
-                    "large": null
-                },
-                status: null,
-                followed: true
-            }, {
-                name: "Nick",
-                id: 2,
-                uniqueUrlName: null,
-                photos: {
-                    "small": null,
-                    "large": null
-                },
-                status: null,
-                followed: false
-            }, {
-                name: "Jax",
-                id: 3,
-                uniqueUrlName: null,
-                photos: {
-                    "small": null,
-                    "large": null
-                },
-                status: null,
-                followed: false
-            }, {
-                name: "Helen",
-                id: 4,
-                uniqueUrlName: null,
-                photos: {
-                    "small": null,
-                    "large": null
-                },
-                status: null,
-                followed: false
-            },
 
-        ],
-        pageSize: 5,
-        totalCount: 0,
-        currentPage:1,
-        isFetchingValue: false,
-        followingInProgress:[]
-
-    }
-    expect(startState.items[0].followed).toBe(true)
-    const endState = usersReducer(startState, unfollowSuccess(1))
-    expect(endState.items[0].followed).toBe(false)
+    expect(startState.items[3].followed).toBe(true)
+    const endState = usersReducer(startState, followUnfollow(4,false))
+    expect(endState.items[3].followed).toBe(false)
 })
 test('Users should be added ', () => {
 
@@ -141,59 +93,10 @@ test('Users should be added ', () => {
             followed: false
         }
     ]
-    const startState: initialStateUsersType = {
-        items: [
-            {
-                name: "Victor",
-                id: 1,
-                uniqueUrlName: null,
-                photos: {
-                    "small": null,
-                    "large": null
-                },
-                status: null,
-                followed: false
-            }, {
-                name: "Nick",
-                id: 2,
-                uniqueUrlName: null,
-                photos: {
-                    "small": null,
-                    "large": null
-                },
-                status: null,
-                followed: false
-            }, {
-                name: "Jax",
-                id: 3,
-                uniqueUrlName: null,
-                photos: {
-                    "small": null,
-                    "large": null
-                },
-                status: null,
-                followed: false
-            }, {
-                name: "Helen",
-                id: 4,
-                uniqueUrlName: null,
-                photos: {
-                    "small": null,
-                    "large": null
-                },
-                status: null,
-                followed: false
-            },
 
-        ],
-        pageSize: 5,
-        totalCount: 0,
-        currentPage:1,
-        isFetchingValue: false,
-        followingInProgress: []
-    }
     expect(startState.items.length).toBe(4)
     const endState = usersReducer(startState, setUsers(arr))
-    expect(endState.items.length).toBe(6)
-    expect(endState.items[5].name).toBe('Helen')
+    expect(endState.items.length).toBe(2)
+
+
 })

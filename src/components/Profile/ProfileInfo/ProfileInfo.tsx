@@ -1,9 +1,10 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import {ProfileUserType} from "../../../Redux/Reducers/profilePageReducer";
-import ProfileStatus from "./ProfileStatus";
+import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
+
 type ProfileInfoType ={
-    profile: ProfileUserType
+    profile: ProfileUserType | undefined
     status: string
     updateUserStatus: (status: string) => void
 }
@@ -14,8 +15,8 @@ export const ProfileInfo = (props: ProfileInfoType) => {
 
             <div className={s.descriptionBlock}>
                 <img
-                    src={props.profile.photos.large} alt="ava"/>
-                <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
+                    src={props.profile && props.profile.photos.large} alt="ava"/>
+                <ProfileStatusWithHooks status={props.status} updateUserStatus={props.updateUserStatus}/>
 
             </div>
         </div>

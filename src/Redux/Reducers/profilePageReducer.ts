@@ -31,7 +31,7 @@ export type ProfileUserType = {
 }
 export type InitialProfilePageReducerStateType = {
     posts: PostsType[]
-    profile: ProfileUserType
+    profile: ProfileUserType | undefined
     status: string
 }
 export const initialState: InitialProfilePageReducerStateType = {
@@ -71,7 +71,10 @@ export const initialState: InitialProfilePageReducerStateType = {
 export const profilePageReducer = (state = initialState, action: ProfilePageReducerType): InitialProfilePageReducerStateType => {
     switch (action.type) {
         case 'ADD-POST': {
-            return {...state, posts: [...state.posts, {id: v1(), post: action.payload.value, like: Math.ceil(Math.random()*100)}]}
+            return {
+                ...state,
+                posts: [...state.posts, {id: v1(), post: action.payload.value, like: Math.ceil(Math.random() * 100)}]
+            }
         }
         case 'SET_USER_PROFILE': {
             return {...state, profile: action.payload.userProfile}
@@ -79,39 +82,32 @@ export const profilePageReducer = (state = initialState, action: ProfilePageRedu
         case 'SET_USER_STATUS': {
             return {...state, status: action.payload.status}
         }
+        case 'DELETE-POST': {
+            return {...state,posts: state.posts.filter(el => el.id !== action.payload.id)}
+        }
         default:
             return state
     }
 
 };
-export type ProfilePageReducerType = AddPostACType | setUserProfileACType | setUserStatusType;
+export type ProfilePageReducerType =
+    AddPostACType
+    | setUserProfileACType
+    | setUserStatusType
+    | deletePostType;
 type AddPostACType = ReturnType<typeof addPost>
 type setUserProfileACType = ReturnType<typeof setUserProfile>
 type setUserStatusType = ReturnType<typeof setUserStatus>
-export const addPost = (value:string) => {
-    return {
-        type: 'ADD-POST',
-        payload:{
-            value
-        }
-    } as const
-}
-export const setUserProfile = (userProfile: ProfileUserType) => {
-    return {
-        type: 'SET_USER_PROFILE',
-        payload: {
-            userProfile
-        }
-    } as const
-}
-export const setUserStatus = (status: string) => {
-    return {
-        type: 'SET_USER_STATUS',
-        payload: {
-            status
-        }
-    } as const
-}
+type deletePostType = ReturnType<typeof deletePost>
+//actions
+export const addPost = (value: string) => ({type: 'ADD-POST', payload: {value}}) as const
+export const setUserProfile = (userProfile: ProfileUserType) => ({
+    type: 'SET_USER_PROFILE',
+    payload: {userProfile}
+}) as const
+export const setUserStatus = (status: string) => ({type: 'SET_USER_STATUS', payload: {status}}) as const
+export const deletePost = (id: string) => ({type: 'DELETE-POST', payload: {id}}) as const
+//thunks
 export const getProfile = (id: string) => {
     return (dispatch: Dispatch) => {
         profileAPI.getProfile(id).then(data => {
@@ -129,7 +125,7 @@ export const getUserStatus = (userId: string) => {
 export const updateUserStatus = (status: string) => {
     return (dispatch: Dispatch) => {
         profileAPI.updateUserStatus(status).then(response => {
-            if(response.data.resultCode === 0){
+            if (response.data.resultCode === 0) {
                 dispatch(setUserStatus(status))
             }
 

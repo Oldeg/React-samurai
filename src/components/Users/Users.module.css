@@ -3,26 +3,14 @@
     height: 30px;
     border-radius: 50%;
 }
+
 .message {
     width: 100px;
     height: 50px;
     background-color: azure;
 }
-.selected {
-    font-weight: bold;
-    color: khaki;
-    margin-left: 5px;
-    cursor: pointer;
-}
-.pages{
-    margin-left: 5px;
-    cursor: pointer;
 
-}
-.pagesBox {
-    display: flex;
-    justify-content: center;
-}
+
 .preloader {
     width: 100px;
     height: 100px;

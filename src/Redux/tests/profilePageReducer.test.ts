@@ -1,96 +1,41 @@
 import {v1} from "uuid";
 import {
-    addPost,
+    addPost, deletePost,
     InitialProfilePageReducerStateType,
     profilePageReducer
 } from "../Reducers/profilePageReducer";
-
-
-
-test('New post should be added', () => {
-    const startState: InitialProfilePageReducerStateType = {
+let startState: InitialProfilePageReducerStateType
+beforeEach(() => {
+    startState = {
         posts: [
             {id: v1(), post: 'Dog', like: 30},
             {id: v1(), post: 'Cars', like: 20},
             {id: v1(), post: 'Fruits', like: 34},
             {id: v1(), post: 'Cinema', like: 10},
             {id: v1(), post: 'Music', like: 14},
-            {id: v1(), post: 'City', like: 398},
+            {id:'fff', post: 'City', like: 398},
         ],
-        profile: {
-            aboutMe: "я круто чувак 1001%",
-            contacts: {
-                facebook: "facebook.com",
-                website: null,
-                vk: "vk.com/dimych",
-                twitter: "https://twitter.com/@sdf",
-                instagram: "instagra.com/sds",
-                youtube: null,
-                github: "github.com",
-                mainLink: null,
-
-            },
-            lookingForAJob: true,
-            lookingForAJobDescription: "не ищу, а дурачусь",
-            fullName: "samurai dimych",
-            userId: 2,
-            photos: {
-                small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
-                large: "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-            },
-
-        },
+        profile: undefined,
         status: ''
-    };
+    }
+})
+test('New post should be added', () => {
+
     expect(startState.posts.length).toBe(6)
     const endState = profilePageReducer(startState, addPost(''))
     expect(endState.posts.length).toBe(7)
     expect(endState.posts[6].post).toBe('')
-    expect(endState.posts[6].like).toBe(0)
 
 
 })
-/*
-test('Posts text should be updated', () => {
-    const startState: InitialProfilePageReducerStateType = {
-        posts: [
-            {id: v1(), post: 'Dog', like: 30},
-            {id: v1(), post: 'Cars', like: 20},
-            {id: v1(), post: 'Fruits', like: 34},
-            {id: v1(), post: 'Cinema', like: 10},
-            {id: v1(), post: 'Music', like: 14},
-            {id: v1(), post: 'City', like: 398},
-        ],
+test('Correct post should be deleted', () => {
 
-        profile: {
-            aboutMe: "я круто чувак 1001%",
-            contacts: {
-                facebook: "facebook.com",
-                website: null,
-                vk: "vk.com/dimych",
-                twitter: "https://twitter.com/@sdf",
-                instagram: "instagra.com/sds",
-                youtube: null,
-                github: "github.com",
-                mainLink: null
-            },
-            lookingForAJob: true,
-            lookingForAJobDescription: "не ищу, а дурачусь",
-            fullName: "samurai dimych",
-            userId: 2,
-            photos: {
-                small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
-                large: "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-            },
-
-        },
-        status: ''
-    };
-
-    const endState = profilePageReducer(startState, changeNewText('Hey'))
-   expect(endState.posts.length).toBe(6)
-    expect(endState.newPostText).toBe('Hey')
+    expect(startState.posts.length).toBe(6)
+    const endState = profilePageReducer(startState, deletePost('fff'))
+    expect(endState.posts.length).toBe(5)
 
 
 
-})*/
+})
+
+
