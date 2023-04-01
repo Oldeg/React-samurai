@@ -30,7 +30,7 @@
     "web-vitals": "2.1.0"
   },
   "scripts": {
-    "start":"react-scripts start" ,
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!@samurai-way/allow-react)/\" --env=jsdom",
     "eject": "react-scripts eject",
@@ -83,7 +83,7 @@
     "@types/react-dom": "17.0.9",
     "@types/react-redux": "7.1.22",
     "@types/react-router-dom": "5.3.3",
-    "@types/react-test-renderer": "17.0.1",
+    "@types/react-test-renderer": "17.0.2",
     "@types/redux-form": "8.3.3",
     "@types/uuid": "^8.3.4",
     "babel-plugin-named-exports-order": "^0.0.2",

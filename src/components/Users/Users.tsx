@@ -16,18 +16,16 @@ type UsersComponentPropsType = {
 }
 export const Users = (props: UsersComponentPropsType) => {
 
-
     return (
         <div>
-
-            <Paginator totalCount={props.totalCount} pageSize={props.pageSize}
-                       onPageChanged={props.onPageChanged} currentPage={props.currentPage}/>
 
             {props.users.map((u: UserType) => <User id={u.id} name={u.name} status={u.status}
                                                     followed={u.followed} uniqueUrlName={u.uniqueUrlName}
                                                     photos={u.photos} key={u.id}
                                                     followingInProgress={props.followingInProgress}
                                                     followUnfollowFlow={props.followUnfollowFlow}/>)}
+            <Paginator totalCount={props.totalCount} pageSize={props.pageSize}
+                       onPageChanged={props.onPageChanged} currentPage={props.currentPage}/>
         </div>
     );
 }

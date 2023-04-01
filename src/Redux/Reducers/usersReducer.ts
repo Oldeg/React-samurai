@@ -52,10 +52,11 @@ const usersReducer = (state = initialState, action: UsersReducerType): InitialSt
         }
 
         case "SET_TOTAL_USERS_COUNT": {
-            if (action.payload.totalCount > 100) {
-                return {...state, totalCount: 80}
+            return action.payload.totalCount > 500 ? {...state, totalCount: 500} : {
+                ...state,
+                totalCount: action.payload.totalCount
             }
-            return {...state, totalCount: action.payload.totalCount}
+
         }
 
         case 'TOGGLE_IS_FETCHING': {

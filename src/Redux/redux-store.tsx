@@ -1,4 +1,4 @@
-import {AnyAction, applyMiddleware, combineReducers, createStore} from "redux";
+import {AnyAction, applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profilePageReducer, {ProfilePageReducerType} from "./Reducers/profilePageReducer";
 import messagesPageReducer, {MessagesPageReducerType} from "./Reducers/messagesPageReducer";
 import sidebarReducer from "./Reducers/sidebarReducer";
@@ -9,6 +9,11 @@ import {FormAction, reducer as formReducer} from "redux-form";
 import {useDispatch} from "react-redux";
 import {appReducer} from "./Reducers/appReducer";
 
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
 let rootReducer = combineReducers(
     {
         profilePage: profilePageReducer,
@@ -20,7 +25,9 @@ let rootReducer = combineReducers(
         form: formReducer
     })
 export type AppStateType = ReturnType<typeof rootReducer>
-export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)))
+
 export type AppDispatch = ThunkDispatch<AppStateType, unknown, AnyAction>
 export const useAppDispatch: () => AppDispatch = useDispatch
 export type AppActionsType = AuthReducerType | MessagesPageReducerType | ProfilePageReducerType | UsersReducerType;

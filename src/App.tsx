@@ -4,7 +4,7 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 
 
-import {Route, withRouter} from 'react-router-dom';
+import {BrowserRouter, Route, withRouter} from 'react-router-dom';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
@@ -15,28 +15,31 @@ import {UsersContainer} from "./components/Users/UsersContainer";
 import {ProfileContainer1} from "./components/Profile/ProfileContainer";
 import {HeaderContainer1} from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./Redux/Reducers/appReducer";
-import {AppStateType} from "./Redux/redux-store";
+import {AppStateType, store} from "./Redux/redux-store";
 import {Preloader} from "./components/common/Preloader";
 
 type MapDispatchToPropsType = {
-    initializeApp:() => void
+    initializeApp: () => void
 }
 type MapStateToPropsType = {
     initialized: boolean
 }
 type AppCommonType = MapDispatchToPropsType & MapStateToPropsType
+
 class App extends React.Component<AppCommonType> {
     constructor(props: AppCommonType) {
         super(props);
     }
+
     componentDidMount() {
         this.props.initializeApp()
     }
+
     render() {
-        if(!this.props.initialized){
+        if (!this.props.initialized) {
             return <Preloader/>
         } else {
             return <div className="app-wrapper">
@@ -61,9 +64,17 @@ class App extends React.Component<AppCommonType> {
 
     }
 }
-const mapStateToProps = (state: AppStateType):MapStateToPropsType => {
+
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-       initialized: state.app.initialized
+        initialized: state.app.initialized
     }
 }
-export default compose<React.ComponentType>(withRouter, connect(mapStateToProps,{initializeApp}))(App);
+const AppContainer = compose<React.ComponentType>(withRouter, connect(mapStateToProps, {initializeApp}))(App);
+export const SamuraiJsApp = () => {
+    return <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </BrowserRouter>
+}

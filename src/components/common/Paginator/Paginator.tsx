@@ -10,15 +10,50 @@ type PaginatorType = {
 }
 export const Paginator: React.FC<PaginatorType> = ({totalCount, pageSize, onPageChanged, currentPage}) => {
     let pagesCount = Math.ceil(totalCount / pageSize);
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
+    let pagesStart: Array<number> = [];
+    let pagesEnd: Array<number> = []
+    for (let i = 1; i <= 5; i++) {
+        pagesStart.push(i)
+    }
+    for (let i = pagesCount - 4; i <= pagesCount; i++) {
+        pagesEnd.push(i)
     }
     return (
-        <div className={s.pagesBox}>{pages.map((pageNumber, index) =>
-            <span key={index}
-                  onClick={() => onPageChanged(pageNumber)}
-                  className={currentPage === pageNumber ? s.selected : s.pages}>{pageNumber}</span>)}
+        <div className={s.pagesBox}>
+            <button className={s.button} onClick={() => onPageChanged(currentPage - 1)}
+                    disabled={currentPage === 1}> {'<'} </button>
+            {currentPage > 5 ?
+                <span><span onClick={() => onPageChanged(1)}>1 ... </span>
+
+                    {currentPage > pagesCount - 5 ? null :
+                        <span>
+                            <span className={s.pages}>{currentPage - 1}</span>
+
+                        <span className={s.selected}>
+                    {currentPage}
+                        </span>
+
+
+                        <span className={s.pages}>
+                    {currentPage + 1}
+                        </span>
+                    </span>}
+                </span>
+                : pagesStart.map((page, index) => <span key={index} onClick={() => onPageChanged(page)}
+                                                        className={currentPage === page ? s.selected : s.pages}>{page}</span>)}
+
+            {currentPage < pagesCount - 4 ?
+
+                <span onClick={() => onPageChanged(pagesCount)}> ... {pagesCount}</span> : pagesEnd.map((page, index) =>
+                    <span key={index}
+                          className={page === currentPage ? s.selected : s.pages}
+                          onClick={() => onPageChanged(page)}>{page}</span>)
+
+            }
+
+
+            <button className={s.button} onClick={() => onPageChanged(currentPage + 1)}
+                    disabled={currentPage === pagesCount}> {'>'} </button>
         </div>
     );
 };
