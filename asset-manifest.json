@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/React-samurai/static/css/main.0b7e6c2e.css",
+    "main.js": "/React-samurai/static/js/main.b730c89d.js",
+    "static/media/istockphoto-1300845620-612x612.jpg": "/React-samurai/static/media/istockphoto-1300845620-612x612.8e7ab55da0bc52271ed8.jpg",
+    "index.html": "/React-samurai/index.html",
+    "main.0b7e6c2e.css.map": "/React-samurai/static/css/main.0b7e6c2e.css.map",
+    "main.b730c89d.js.map": "/React-samurai/static/js/main.b730c89d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0b7e6c2e.css",
+    "static/js/main.b730c89d.js"
+  ]
+}
