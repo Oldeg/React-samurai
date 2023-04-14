@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/React-samurai/static/css/main.4de72bc5.css",
-    "main.js": "/React-samurai/static/js/main.e388d3c6.js",
+    "main.js": "/React-samurai/static/js/main.f4e8abfc.js",
     "static/media/animals.webp": "/React-samurai/static/media/animals.a3fea19c79211cac89d8.webp",
     "static/media/forest.jpg": "/React-samurai/static/media/forest.92458287a76dfdab71fe.jpg",
     "static/media/post-3.jpg": "/React-samurai/static/media/post-3.0e9b5bba4961ab36c436.jpg",
@@ -27,10 +27,10 @@
     "static/media/heart-color.webp": "/React-samurai/static/media/heart-color.967912bffab0ae3303a1.webp",
     "static/media/heart.webp": "/React-samurai/static/media/heart.7199c3f0c6ed0eb9cf08.webp",
     "main.4de72bc5.css.map": "/React-samurai/static/css/main.4de72bc5.css.map",
-    "main.e388d3c6.js.map": "/React-samurai/static/js/main.e388d3c6.js.map"
+    "main.f4e8abfc.js.map": "/React-samurai/static/js/main.f4e8abfc.js.map"
   },
   "entrypoints": [
     "static/css/main.4de72bc5.css",
-    "static/js/main.e388d3c6.js"
+    "static/js/main.f4e8abfc.js"
   ]
 }
