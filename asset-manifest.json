@@ -1,14 +1,36 @@
 {
   "files": {
-    "main.css": "/React-samurai/static/css/main.0b7e6c2e.css",
-    "main.js": "/React-samurai/static/js/main.b730c89d.js",
+    "main.css": "/React-samurai/static/css/main.4de72bc5.css",
+    "main.js": "/React-samurai/static/js/main.4afc257a.js",
+    "static/media/animals.webp": "/React-samurai/static/media/animals.a3fea19c79211cac89d8.webp",
+    "static/media/forest.jpg": "/React-samurai/static/media/forest.92458287a76dfdab71fe.jpg",
+    "static/media/post-3.jpg": "/React-samurai/static/media/post-3.0e9b5bba4961ab36c436.jpg",
+    "static/media/post-4.jpg": "/React-samurai/static/media/post-4.4b48905002d63a734597.jpg",
+    "static/media/profile-banner-big.webp": "/React-samurai/static/media/profile-banner-big.65ffc04ba5b984fc3d0d.webp",
+    "static/media/ocean.jpg": "/React-samurai/static/media/ocean.d614f3723c56b2b3400b.jpg",
+    "static/media/post-2.jpg": "/React-samurai/static/media/post-2.44835ef9ffe95431869e.jpg",
+    "static/media/post-1.webp": "/React-samurai/static/media/post-1.baf27614029684204e27.webp",
+    "static/media/life.webp": "/React-samurai/static/media/life.b83f80692752d07055dd.webp",
     "static/media/istockphoto-1300845620-612x612.jpg": "/React-samurai/static/media/istockphoto-1300845620-612x612.8e7ab55da0bc52271ed8.jpg",
+    "static/media/advertise.webp": "/React-samurai/static/media/advertise.2f60101349e0007b079a.webp",
+    "static/media/profile-banner.webp": "/React-samurai/static/media/profile-banner.76286a5f9f85658c0e2f.webp",
+    "static/media/banner-ava.webp": "/React-samurai/static/media/banner-ava.d039b5fe05e5f0950025.webp",
+    "static/media/upload-base.svg": "/React-samurai/static/media/upload-base.b48b6103dcf41e6a42bc.svg",
+    "static/media/upload.svg": "/React-samurai/static/media/upload.749a5a31517dbb3e550f.svg",
+    "static/media/check-mark.svg": "/React-samurai/static/media/check-mark.a3b3d5af1aa545012ae9.svg",
+    "static/media/ava-1.webp": "/React-samurai/static/media/ava-1.137bae97a2d10dd83793.webp",
+    "static/media/ava-4.webp": "/React-samurai/static/media/ava-4.4a20df2f1d65811122e0.webp",
+    "static/media/ava-3.webp": "/React-samurai/static/media/ava-3.d7d8e87c445f525764c2.webp",
+    "static/media/ava-2.webp": "/React-samurai/static/media/ava-2.04c17dfc250454e1021c.webp",
     "index.html": "/React-samurai/index.html",
-    "main.0b7e6c2e.css.map": "/React-samurai/static/css/main.0b7e6c2e.css.map",
-    "main.b730c89d.js.map": "/React-samurai/static/js/main.b730c89d.js.map"
+    "static/media/logo.webp": "/React-samurai/static/media/logo.a7dd637e4d5ad2560669.webp",
+    "static/media/heart-color.webp": "/React-samurai/static/media/heart-color.967912bffab0ae3303a1.webp",
+    "static/media/heart.webp": "/React-samurai/static/media/heart.7199c3f0c6ed0eb9cf08.webp",
+    "main.4de72bc5.css.map": "/React-samurai/static/css/main.4de72bc5.css.map",
+    "main.4afc257a.js.map": "/React-samurai/static/js/main.4afc257a.js.map"
   },
   "entrypoints": [
-    "static/css/main.0b7e6c2e.css",
-    "static/js/main.b730c89d.js"
+    "static/css/main.4de72bc5.css",
+    "static/js/main.4afc257a.js"
   ]
 }
