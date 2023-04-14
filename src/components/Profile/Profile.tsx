@@ -1,27 +1,47 @@
 import React from 'react';
-import s from './Profile.module.css';
-import {ProfileInfo} from './ProfileInfo/ProfileInfo';
+import s from './Profile.module.scss';
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {ProfileUserType} from "../../Redux/Reducers/profilePageReducer";
-
+import {ProfileUserType} from "Redux/Reducers/profilePageReducer";
+import {EditProfileType} from 'components/Profile/ProfileForm';
+import {ProfileMenu} from 'components/Profile/ProfileMenu/ProfileMenu';
+import {AsidePanel} from 'components/common/AsidePanel/AsidePanel';
+import {Cards2} from 'components/Home/HomePage';
+import {CardType} from 'UI/Card/Card';
 
 type ProfilePropsType = {
-    profile: ProfileUserType | undefined
+    profile: ProfileUserType
     status: string
     updateUserStatus: (status: string) => void
+    owner: boolean
+    savePhoto: (photo: File) => void
+    saveProfile: (profile: EditProfileType) => void
 }
+export const Cards: CardType[] = [
+    {
+        subTitle: 'Adventure',
+        title: 'Travel The World', cardTitle: 'Page You May Like', isLike: true, isImage: false, isProfile: true
+    },
+    {
+        cardTitle: 'Latest Top News', title: 'Any one can join with us if you want',
+        subTitle: '15 Min Ago',
+        isLike: false, isImage: false
+    }
+]
 const Profile = (props: ProfilePropsType) => {
 
     return (
-        <div className={s.profile}>
-            <div>
-                <img
-                    src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/Zugpsitze_mountain.jpg?crop=0%2C176%2C3008%2C1654&wid=4000&hei=2200&scl=0.752"
-                    alt="nature"/>
+        <>
+            <div className={s.profileBanner}>
             </div>
-            <ProfileInfo profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus}/>
-            <MyPostsContainer/>
-        </div>
+            <ProfileMenu image={props.profile.photos.large}/>
+            <div className={s.container}>
+                <AsidePanel cards={Cards} isBanner={false}/>
+                <MyPostsContainer/>
+                <AsidePanel cards={Cards2} isBanner={false}/>
+            </div>
+            {/*<ProfileInfo profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus}
+                         owner={props.owner} savePhoto={props.savePhoto} saveProfile={props.saveProfile}/>*/}
+        </>
     );
 };
 

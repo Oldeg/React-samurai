@@ -8,9 +8,7 @@ const Navbar = () => {
             <div className={s.item}>
                 <NavLink to="/profile" activeClassName={s.active}>Profile</NavLink>
             </div>
-            <div className={s.item}>
-                <NavLink to="/dialogs" activeClassName={s.active}>Messages</NavLink>
-            </div>
+
             <div className={`${s.item} ${s.active}`}>
                 <NavLink to="/news" activeClassName={s.active}>News</NavLink>
             </div>
@@ -31,17 +29,6 @@ const Navbar = () => {
                     <img src="https://i.iplsc.com/-/000AIAU0P13DKS7P-C122.jpg" alt="3"/>
                 </div>
                 <div className={s.sidebar}>
-                    {/*<StoreContext.Consumer>{
-                        (store) => {
-                            return <div>
-                                <div>{store.getState().sidebar.elements[0].name}</div>
-                                <div>{store.getState().sidebar.elements[1].name}</div>
-                                <div>{store.getState().sidebar.elements[2].name}</div>
-                            </div>
-                        }
-
-                    }
-                    </StoreContext.Consumer>*/}
 
                 </div>
             </div>

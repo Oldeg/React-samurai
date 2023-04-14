@@ -1,31 +1,27 @@
 import React from 'react';
-import './App.css';
+import 'App.module.css';
 
-import Navbar from './components/Navbar/Navbar';
-
-
-import {BrowserRouter, Route, withRouter} from 'react-router-dom';
-import {News} from './components/News/News';
-import {Music} from './components/Music/Music';
-import {Settings} from './components/Settings/Settings';
-import {Friends} from './components/Friends/Friends';
-
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {UsersContainer} from "./components/Users/UsersContainer";
-import {ProfileContainer1} from "./components/Profile/ProfileContainer";
-import {HeaderContainer1} from "./components/Header/HeaderContainer";
+import s from './App.module.css'
+import {BrowserRouter, Route, Switch, withRouter} from 'react-router-dom';
+import {Friends} from 'components/Friends/Friends';
+import {DialogsContainer} from "components/Dialogs/DialogsContainer";
+import {UsersContainer} from "components/Users/UsersContainer";
+import {ProfileContainer1} from "components/Profile/ProfileContainer";
+import {HeaderContainer1} from "components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
-import {initializeApp} from "./Redux/Reducers/appReducer";
-import {AppStateType, store} from "./Redux/redux-store";
-import {Preloader} from "./components/common/Preloader";
+import {initializeApp} from "Redux/Reducers/appReducer";
+import {AppStateType, store} from "Redux/redux-store";
+import {Preloader} from "components/common/Preloader";
+import {HomePage} from 'components/Home/HomePage';
 
 type MapDispatchToPropsType = {
     initializeApp: () => void
 }
 type MapStateToPropsType = {
     initialized: boolean
+    isLoggedIn: boolean
 }
 type AppCommonType = MapDispatchToPropsType & MapStateToPropsType
 
@@ -42,23 +38,27 @@ class App extends React.Component<AppCommonType> {
         if (!this.props.initialized) {
             return <Preloader/>
         } else {
-            return <div className="app-wrapper">
-                <HeaderContainer1/>
-                <Navbar/> {/*sidebar={props.store.getState().sidebar}*/}
-                <div className="app-wrapper-content">
-                    <Route exact path="/dialogs"
-                           render={() => <DialogsContainer/>}/>
-                    <Route path="/profile/:userId?"
-                           render={() => <ProfileContainer1/>}/>
-                    <Route path="/news" render={() => <News/>}/>
-                    <Route path="/music" render={() => <Music/>}/>
-                    <Route path="/settings" render={() => <Settings/>}/>
-                    <Route path="/friends" render={() => <Friends/>}/>
-                    <Route path="/users" render={() => <UsersContainer/>}/>
-                    <Route path="/login" render={() => <Login/>}/>
+            return <div>
+                {!this.props.isLoggedIn ? <Login/> :
+                    <div>
+                        <HeaderContainer1/>
 
-                </div>
+                        <div className={s.appContent}>
+                            <Switch>
+                                <Route exact path="/home"
+                                       render={() => <HomePage/>}/>
+                                <Route exact path="/dialogs"
+                                       render={() => <DialogsContainer/>}/>
+                                <Route path="/profile/:userId?"
+                                       render={() => <ProfileContainer1/>}/>
+                                <Route exact path={'/'} render={() => <HomePage/>}/>
+                                <Route path="/friends" render={() => <Friends/>}/>
+                                <Route path="/users" render={() => <UsersContainer/>}/>
+                                <Route path="/*" render={() => <div> 404 Not found</div>}/>
+                            </Switch>
+                        </div>
 
+                    </div>}
             </div>
         }
 
@@ -67,7 +67,8 @@ class App extends React.Component<AppCommonType> {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        initialized: state.app.initialized
+        initialized: state.app.initialized,
+        isLoggedIn: state.auth.isAuth
     }
 }
 const AppContainer = compose<React.ComponentType>(withRouter, connect(mapStateToProps, {initializeApp}))(App);

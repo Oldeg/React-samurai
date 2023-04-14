@@ -1,7 +1,6 @@
 import {AnyAction, applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profilePageReducer, {ProfilePageReducerType} from "./Reducers/profilePageReducer";
 import messagesPageReducer, {MessagesPageReducerType} from "./Reducers/messagesPageReducer";
-import sidebarReducer from "./Reducers/sidebarReducer";
 import usersReducer, {UsersReducerType} from "./Reducers/usersReducer";
 import {authReducer, AuthReducerType} from "./Reducers/authReducer";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk'
@@ -19,7 +18,6 @@ let rootReducer = combineReducers(
         profilePage: profilePageReducer,
         messagesPage: messagesPageReducer,
         usersPage: usersReducer,
-        sidebar: sidebarReducer,
         app: appReducer,
         auth: authReducer,
         form: formReducer

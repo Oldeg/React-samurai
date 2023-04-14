@@ -1,0 +1,96 @@
+.loginWrapper {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+}
+
+.login {
+    width: 500px;
+    text-align: center;
+    box-shadow: 0 3px 20px 0 rgb(0 0 0 / 25%);
+    border-radius: 15px;
+}
+
+.loginTitle {
+    width: 100%;
+    color: #fff;
+    font-size: 23px;
+    background-color: #dc4734;
+    padding: 16px 0;
+    margin-bottom: 50px;
+    border-radius: 15px 15px 0 0;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 70px;
+}
+
+.inputWrapper {
+    width: 75%;
+}
+
+.input {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid #999;
+    padding: 5px 12px;
+    outline: none;
+    transition: 0.3s ease-in;
+    font-size: 16px;
+}
+
+.checkBoxWrapper {
+    width: 75%;
+    display: flex;
+    justify-content: start;
+    text-align: center;
+}
+
+.btnContainer {
+    width: 60%;
+}
+
+.btn {
+    width: 100%;
+    border: none;
+    border-radius: 40px;
+    background-color: #dc4734;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 8px 25px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: .4s;
+}
+
+.btn:hover {
+    background-color: #000;
+}
+
+.checkBox {
+    margin-right: 7px;
+    appearance: none;
+    border: 3px solid #dc4734;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+.checkBox:checked {
+    background: url('../../assets/images/check-mark.svg') no-repeat 54% 43%;
+    appearance: none;
+}
+
+.remember {
+    padding-top: 2px;
+}

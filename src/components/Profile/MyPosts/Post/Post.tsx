@@ -1,18 +1,37 @@
 import React from 'react';
-import s from './Post.module.css'
+import s from 'components/Profile/MyPosts/Post/Post.module.scss'
+
+
 type PostType = {
     post: string
     like: number
-    id:string
+    id: string
+    image?: string
+    avatar?: string
+    lastSeen: string
+    name: string
 }
 const Post = (props: PostType) => {
     return (
-        <div className={s.item}>
-            {props.post}
-            <img src='https://cdn1.naekranie.pl/media/cache/article-cover/2018/11/avatar-sequel-budget-700x300.jpg' alt={'Ava'}/>
-            <div><span>like {props.like}</span></div>
-            <div><span>dislike</span></div>
-
+        <div className={s.post}>
+            <div className={s.postContainer}>
+                <img src={props.avatar} alt="ava" className={s.ava}/>
+                <div className={s.userInfo}>
+                    <h6 className={s.name}>{props.name}</h6>
+                    <p className={s.lastSeen}>{props.lastSeen}</p>
+                </div>
+                <div className={s.settings}>
+                    <span className={s.settings_item}></span>
+                    <span className={s.settings_item}></span>
+                    <span className={s.settings_item}></span>
+                </div>
+            </div>
+            <div className={s.textImage}>
+                <p className={s.text}>
+                    {props.post}
+                </p>
+                {props.image && <img src={props.image} alt="post image" className={s.postImage}/>}
+            </div>
         </div>
     );
 };

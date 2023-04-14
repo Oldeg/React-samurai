@@ -1,0 +1,53 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background-base);
+  box-shadow: 0 1px 15px 0 rgba(51, 51, 51, 0.2);
+  padding: 15px;
+}
+
+.btnContainer {
+  align-self: end;
+  display: flex;
+  margin-top: 10px;
+}
+
+.submitBtn {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 7px 22px;
+  display: inline-block;
+  border-radius: 50px;
+  text-transform: capitalize;
+  background-color: var(--color-primary-base);
+  border: none;
+  cursor: pointer;
+  transition: 0.4s;
+
+  &:hover {
+    background-color: #000;
+  }
+}
+
+.selectBtn {
+  margin-right: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.upload {
+  width: 30px;
+  height: 30px;
+  background-image: url("../../../../assets/images/upload.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: .4s;
+
+  &:hover {
+    background-image: url("../../../../assets/images/upload-base.svg");
+  }
+}

@@ -1,0 +1,10 @@
+@import "styles/styles.module";
+
+.homeContent {
+  display: flex;
+  @include container;
+  padding-top: 80px;
+}
+
+
+

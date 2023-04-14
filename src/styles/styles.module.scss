@@ -1,0 +1,6 @@
+@mixin container() {
+  padding-right: calc(1.5rem * .625);
+  padding-left: calc(1.5rem * .625);
+  max-width: 1140px;
+  margin: 0 auto;
+}

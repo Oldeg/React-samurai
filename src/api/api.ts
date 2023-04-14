@@ -1,4 +1,5 @@
 import axios from "axios";
+import {EditProfileType} from 'components/Profile/ProfileForm';
 
 const instance = axios.create({
     withCredentials: true,
@@ -39,6 +40,18 @@ export const profileAPI = {
     updateUserStatus: (status: string) => {
         return instance.put(`profile/status`, {status: status})
 
+    },
+    savePhoto: (photo: File) => {
+        const formData = new FormData()
+        formData.append('image', photo)
+        return instance.put(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    },
+    saveProfile: (profile: EditProfileType) => {
+        return instance.put(`profile`, profile)
     }
 }
 export const authAPI = {
@@ -47,12 +60,19 @@ export const authAPI = {
             instance.get(`auth/me`,).then(response => response.data)
         );
     },
-    login: (email: string, password: string, rememberMe: boolean = false) => {
+    login: (email: string, password: string, rememberMe: boolean = false, captcha: string = '') => {
         return (
-            instance.post(`auth/login`, {email, password, rememberMe}).then(response => response.data)
+            instance.post(`auth/login`, {email, password, rememberMe, captcha}).then(response => response.data)
         );
     },
     logout: () => {
         return instance.delete(`auth/login`).then(response => response.data)
     }
 }
+
+export const securityAPI = {
+    getCaptchaUrl() {
+        return instance.get('security/get-captcha-url').then(response => response.data)
+    }
+}
+

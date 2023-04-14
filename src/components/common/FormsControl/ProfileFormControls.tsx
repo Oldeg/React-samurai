@@ -1,6 +1,6 @@
 import React, {HTMLInputTypeAttribute} from 'react';
-import s from './ProfileFormControls.module.css'
-import {WrappedFieldInputProps, WrappedFieldMetaProps} from "redux-form";
+import s from 'components/common/FormsControl/ProfileFormControls.module.scss'
+import {Field, WrappedFieldInputProps, WrappedFieldMetaProps} from "redux-form";
 
 type FormControlType = {
     input: WrappedFieldInputProps
@@ -11,22 +11,30 @@ type FormControlType = {
 
 
 }
-const FormControl: React.FC<FormControlType> = ({ meta, children}) => {
+const FormControl: React.FC<FormControlType> = ({meta, children}) => {
     const isError = meta.touched && meta.error
     return (
-        <div className={s.formControl + ' ' + (isError ? s.error : '')}>
+        <div>
             {children}
-            {isError && <span>{meta.error}</span>}
         </div>
     );
 }
 
 export const Textarea: React.FC<FormControlType> = (props) => {
     const {input, meta, children, ...restProps} = props;
-    return <FormControl {...props}><textarea {...input} {...restProps}/></FormControl>
+    return <FormControl {...props}><textarea {...input} {...restProps} className={s.textArea}/></FormControl>
 };
 export const Input: React.FC<FormControlType> = (props) => {
     const {input, meta, children, ...restProps} = props;
-    return <FormControl {...props} ><input {...input} {...restProps}/></FormControl>
+    return <FormControl {...props} ><input {...input} {...restProps} className={s.input}/></FormControl>
 };
 
+export const createField = (placeHolder: string, name: string,
+                            validators: Function[], component: React.ReactNode,
+                            props = {}, text: string) => {
+    return <div>
+        <Field placeholder={placeHolder} validate={validators} name={name} component={component} {...props}/>
+        {text}
+    </div>
+
+}

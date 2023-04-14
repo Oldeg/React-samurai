@@ -1,6 +1,7 @@
 import React from 'react';
-import s from './Header.module.css';
+import s from 'components/Header/Header.module.scss';
 import {NavLink} from "react-router-dom";
+import logo from 'assets/images/logo.webp'
 
 type HeaderProps = {
     isAuth: boolean
@@ -10,11 +11,25 @@ type HeaderProps = {
 const Header = (props: HeaderProps) => {
     return (
         <header className={s.header}>
-            <img src='https://img.freepik.com/darmowe-psd/makieta-logo-na-szarej-scianie_35913-2122.jpg?w=2000'
-                 alt='nature'/>
-            <div className={s.loginBlock}>
-                {props.isAuth ? <button onClick={props.logOut}>Log out</button>:
-                <NavLink to={'/login'}>Login</NavLink>}
+            <div className={s.headerContent}>
+                <ul className={s.headerNav}>
+                    <li>
+                        <NavLink to="/home" className={s.headerNavItem} activeClassName={s.active}>Home</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dialogs" className={s.headerNavItem} activeClassName={s.active}>Messages</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/profile" className={s.headerNavItem}
+                                 activeClassName={s.active}>Profile</NavLink>
+                    </li>
+                </ul>
+
+                <img src={logo} alt=""/>
+                <div className={s.headerBtnWrapper}>
+                    <button onClick={props.logOut} className={s.logoutBtn}>Log out</button>
+                </div>
+
             </div>
         </header>
     );
