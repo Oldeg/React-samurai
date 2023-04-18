@@ -11,16 +11,16 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 
 import {withAuthRedirect} from "hoc/withAuthRedirect";
 import {compose} from "redux";
-import {EditProfileType} from 'components/Profile/ProfileForm';
+import {EditProfileType} from 'components/Profile/ProfileForm/ProfileForm';
 
 
 export type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToProps;
 type MapStateToPropsType = {
     profile: ProfileUserType
     status: string
-    authorizedUserId: number | null
+    authorizedUserId: string
     isAuth: boolean
-
+    popup: boolean
 }
 type MapDispatchToProps = {
     getProfile: (id: string) => void
@@ -67,7 +67,8 @@ export class ProfileContainer extends React.Component<PropsType> {
         return (
             <Profile profile={this.props.profile} status={this.props.status}
                      updateUserStatus={this.props.updateUserStatus} owner={!this.props.match.params.userId}
-                     savePhoto={this.props.saveUserPhoto} saveProfile={this.props.saveProfile}/>
+                     savePhoto={this.props.saveUserPhoto} saveProfile={this.props.saveProfile}
+                     popup={this.props.popup}/>
         )
     }
 
@@ -79,7 +80,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
         authorizedUserId: state.auth.userId,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        popup: state.profilePage.popup
     }
 }
 

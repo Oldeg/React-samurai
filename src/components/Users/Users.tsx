@@ -1,7 +1,8 @@
 import React from 'react';
-import {UserType} from "../../Redux/Reducers/usersReducer";
+import {UserType} from "Redux/Reducers/usersReducer";
 import {Paginator} from "../common/Paginator/Paginator";
 import {User} from "./User";
+import s from './Users.module.scss'
 
 
 type UsersComponentPropsType = {
@@ -17,13 +18,18 @@ type UsersComponentPropsType = {
 export const Users = (props: UsersComponentPropsType) => {
 
     return (
-        <div>
+        <div className={s.users}>
+            <div className={s.container}>
 
-            {props.users.map((u: UserType) => <User id={u.id} name={u.name} status={u.status}
-                                                    followed={u.followed} uniqueUrlName={u.uniqueUrlName}
-                                                    photos={u.photos} key={u.id}
-                                                    followingInProgress={props.followingInProgress}
-                                                    followUnfollowFlow={props.followUnfollowFlow}/>)}
+                <div className={s.usersBox}>{props.users.map((u: UserType) => <User id={u.id} name={u.name}
+                                                                                    status={u.status}
+                                                                                    followed={u.followed}
+                                                                                    uniqueUrlName={u.uniqueUrlName}
+                                                                                    photos={u.photos} key={u.id}
+                                                                                    followingInProgress={props.followingInProgress}
+                                                                                    followUnfollowFlow={props.followUnfollowFlow}/>)}</div>
+
+            </div>
             <Paginator totalCount={props.totalCount} pageSize={props.pageSize}
                        onPageChanged={props.onPageChanged} currentPage={props.currentPage}/>
         </div>

@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './Profile.module.scss';
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {ProfileUserType} from "Redux/Reducers/profilePageReducer";
-import {EditProfileType} from 'components/Profile/ProfileForm';
+import {openPopup, ProfileUserType} from "Redux/Reducers/profilePageReducer";
+import {EditProfileType} from 'components/Profile/ProfileForm/ProfileForm';
 import {ProfileMenu} from 'components/Profile/ProfileMenu/ProfileMenu';
 import {AsidePanel} from 'components/common/AsidePanel/AsidePanel';
 import {Cards2} from 'components/Home/HomePage';
 import {CardType} from 'UI/Card/Card';
+import {EditMenu} from 'components/Profile/EditMenu/EditMenu';
+import {useAppDispatch} from 'Redux/redux-store';
 
 type ProfilePropsType = {
     profile: ProfileUserType
@@ -15,6 +17,7 @@ type ProfilePropsType = {
     owner: boolean
     savePhoto: (photo: File) => void
     saveProfile: (profile: EditProfileType) => void
+    popup: boolean
 }
 export const Cards: CardType[] = [
     {
@@ -28,20 +31,24 @@ export const Cards: CardType[] = [
     }
 ]
 const Profile = (props: ProfilePropsType) => {
-
+    const dispatch = useAppDispatch()
+    const popupHandler = () => {
+        dispatch(openPopup(true))
+    }
     return (
-        <>
+        <div className={s.profile}>
             <div className={s.profileBanner}>
             </div>
-            <ProfileMenu image={props.profile.photos.large}/>
+            <ProfileMenu image={props.profile.photos.large} popupHandler={popupHandler}/>
             <div className={s.container}>
+                <EditMenu popup={props.popup} profile={props.profile} saveProfile={props.saveProfile}
+                          savePhoto={props.savePhoto} updateUserStatus={props.updateUserStatus} status={props.status}
+                          owner={props.owner}/>
                 <AsidePanel cards={Cards} isBanner={false}/>
                 <MyPostsContainer/>
                 <AsidePanel cards={Cards2} isBanner={false}/>
             </div>
-            {/*<ProfileInfo profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus}
-                         owner={props.owner} savePhoto={props.savePhoto} saveProfile={props.saveProfile}/>*/}
-        </>
+        </div>
     );
 };
 

@@ -32,8 +32,9 @@ export const Card: FC<CardType> = ({
         <div className={containerClasses}>
             <h4 className={s.cardTitle}>{cardTitle}</h4>
             {isImage ? <img src={advertise} alt="advertise"/> :
-                cards.map(card => {
-                    return <CardItem image={card.image} title={card.title} subTitle={card.subTitle} isLike={isLike}/>
+                cards.map((card, index) => {
+                    return <CardItem image={card.image} title={card.title} subTitle={card.subTitle} isLike={isLike}
+                                     key={index}/>
                 })
             }
         </div>

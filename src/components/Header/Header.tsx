@@ -7,6 +7,8 @@ type HeaderProps = {
     isAuth: boolean
     login: string | null
     logOut: () => void
+    avatar: string
+    name: string
 }
 const Header = (props: HeaderProps) => {
     return (
@@ -27,7 +29,9 @@ const Header = (props: HeaderProps) => {
 
                 <img src={logo} alt=""/>
                 <div className={s.headerBtnWrapper}>
-                    <button onClick={props.logOut} className={s.logoutBtn}>Log out</button>
+                    <h6 className={s.name}>{props.name}</h6>
+                    <img src={props.avatar} alt="avatar" className={s.avatar}/>
+                    <div onClick={props.logOut} className={s.logoutBtn}/>
                 </div>
 
             </div>

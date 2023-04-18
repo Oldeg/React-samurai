@@ -1,5 +1,6 @@
 import axios from "axios";
-import {EditProfileType} from 'components/Profile/ProfileForm';
+import {EditProfileType} from 'components/Profile/ProfileForm/ProfileForm';
+import {ProfileUserType} from 'Redux/Reducers/profilePageReducer';
 
 const instance = axios.create({
     withCredentials: true,
@@ -30,7 +31,7 @@ export const followingAPI = {
 export const profileAPI = {
     getProfile: (userId: string) => {
         return (
-            instance.get(`profile/${userId}`).then(response => response.data)
+            instance.get<ProfileUserType>(`profile/${userId}`).then(response => response.data)
         );
 
     },
@@ -54,6 +55,7 @@ export const profileAPI = {
         return instance.put(`profile`, profile)
     }
 }
+
 export const authAPI = {
     authMe: () => {
         return (

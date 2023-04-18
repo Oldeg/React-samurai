@@ -17,7 +17,8 @@ beforeEach(() => {
             {id: 'fff', post: 'City', like: 398, image: '', lastSeen: '', avatar: '', name: ''},
         ],
         profile: {} as ProfileUserType,
-        status: ''
+        status: '',
+        popup: false
     }
 })
 test('New post should be added', () => {

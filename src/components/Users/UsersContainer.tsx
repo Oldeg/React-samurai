@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {Users} from "./Users";
 
-import {AppStateType} from "../../Redux/redux-store";
+import {AppStateType} from "Redux/redux-store";
 
 
 import {
@@ -15,7 +15,7 @@ import {
     toggleFollowingInProgress,
 
     UserType
-} from "../../Redux/Reducers/usersReducer";
+} from "Redux/Reducers/usersReducer";
 import {Preloader} from "../common/Preloader";
 import {compose} from "redux";
 import {
@@ -24,7 +24,7 @@ import {
     getPageSize,
     getTotalCount,
     getUsers
-} from "../../Redux/Reducers/users-selector";
+} from "Redux/Reducers/users-selector";
 
 
 type MapStateToPropsType = {

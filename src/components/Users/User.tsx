@@ -1,6 +1,6 @@
 import React from 'react';
-import {UserType} from "../../Redux/Reducers/usersReducer";
-import s from "./Users.module.css";
+import {UserType} from "Redux/Reducers/usersReducer";
+import s from "./User.module.scss";
 import {NavLink} from "react-router-dom";
 import userPhoto from "../../assets/images/istockphoto-1300845620-612x612.jpg";
 
@@ -17,36 +17,26 @@ export const User: React.FC<UserType & UserPropsType> = ({id, ...props}) => {
         props.followUnfollowFlow(id, value)
 
     }
-    return <div key={id}>
-                <span>
-                    <div className={s.imageBox}>
-                        {props.photos.small ? props.photos.small : <NavLink to={'/profile/' + id}><img src={userPhoto}
-                                                                                                       alt="avatar"/></NavLink>}
-
-                    </div>
-                    <div>
-                        {props.followed ? <button onClick={() => unfollowButton(id, false)}
-                                                  disabled={props.followingInProgress.some(number => number === id)}>Unfollow</button> :
-                            <button onClick={() => followButton(id, true)}
-                                    disabled={props.followingInProgress.some(number => number === id)}>Follow</button>}
-                    </div>
-                </span>
-        <span className={s.message}>
-                    <span>
-                        <div>
-                            {props.name}
-                        </div>
-                        <div>
-                            {props.status}
-                        </div>
-                    </span>
-                    <span>
-                        <div>{'u.location.country'}</div>
-                        <div>{'u.location.city'}</div>
-                    </span>
+    return <div key={id} className={s.userCard}>
 
 
-                </span>
+        <NavLink to={'/profile/' + id}>
+            <img src={props.photos.small ? props.photos.small : userPhoto} alt="avatar" className={s.image}/>
+        </NavLink>
+
+        <div className={s.nameAndBtn}>
+            <span className={s.name}>
+            {props.name}
+        </span>
+            <div>
+                {props.followed ? <button onClick={() => unfollowButton(id, false)} className={s.btn}
+                                          disabled={props.followingInProgress.some(number => number === id)}>Unfollow</button> :
+                    <button onClick={() => followButton(id, true)} className={s.btn}
+                            disabled={props.followingInProgress.some(number => number === id)}>Follow</button>}
+            </div>
+        </div>
+
+
     </div>
 };
 

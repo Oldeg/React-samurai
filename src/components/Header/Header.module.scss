@@ -50,26 +50,41 @@
   color: #dc4734;
 }
 
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: capitalize;
+  color: #333;
+  margin-right: 5px;
+}
+
 .logoutBtn {
+  width: 30px;
+  height: 30px;
   border: none;
-  border-radius: 40px;
-  background-color: #dc4734;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 700;
-  padding: 8px 25px;
   cursor: pointer;
   margin-right: 15px;
+  background-image: url("../../assets/images/exit.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: 0.4s;
 }
 
 .logoutBtn:hover {
-  background: #000;
-  transition: .4s;
+  background-image: url("../../assets/images/exit-hover.svg");
 }
 
 .headerBtnWrapper {
   display: flex;
   justify-content: end;
+  align-items: center;
 }
 
 .header .headerContent {

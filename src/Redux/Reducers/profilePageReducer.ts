@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {profileAPI} from "api/api";
-import {EditProfileType} from 'components/Profile/ProfileForm';
+import {EditProfileType} from 'components/Profile/ProfileForm/ProfileForm';
 import {AppDispatch, AppStateType} from 'Redux/redux-store';
 import {stopSubmit} from 'redux-form';
 import life from 'assets/images/life.webp'
@@ -47,7 +47,8 @@ export type ProfileUserType = {
 export type InitialProfilePageReducerStateType = {
     posts: PostsType[]
     profile: ProfileUserType
-    status: string
+    status: string,
+    popup: boolean
 }
 export const initialState: InitialProfilePageReducerStateType = {
     posts: [{post: 'Life', image: life, like: 134, id: '1', avatar: ava1, lastSeen: '25 Min Ago', name: 'Merry Watson'},
@@ -84,7 +85,8 @@ export const initialState: InitialProfilePageReducerStateType = {
         },
 
     },
-    status: ''
+    status: '',
+    popup: false
 };
 
 export const profilePageReducer = (state = initialState, action: ProfilePageReducerType): InitialProfilePageReducerStateType => {
@@ -118,6 +120,9 @@ export const profilePageReducer = (state = initialState, action: ProfilePageRedu
 
             }
         }
+        case 'OPEN-POPUP': {
+            return {...state, popup: action.payload}
+        }
 
         default:
             return state
@@ -130,12 +135,17 @@ export type ProfilePageReducerType =
     | ReturnType<typeof setUserStatus>
     | ReturnType<typeof deletePost>
     | ReturnType<typeof setUserPhotos>
+    | ReturnType<typeof openPopup>
 
 
 //actions
 export const addPost = (value: string, image: string, avatar: string, name: string) => ({
     type: 'ADD-POST',
     payload: {value, image, avatar, name}
+}) as const
+export const openPopup = (value: boolean) => ({
+    type: 'OPEN-POPUP',
+    payload: value
 }) as const
 export const setUserProfile = (userProfile: ProfileUserType) => ({
     type: 'SET_USER_PROFILE',
@@ -151,6 +161,7 @@ export const setUserPhotos = (photos: { small: string, large: string }) => ({
 export const getProfile = (id: string) => async (dispatch: Dispatch) => {
     const data = await profileAPI.getProfile(id)
     dispatch(setUserProfile(data))
+    return data
 }
 
 export const getUserStatus = (userId: string) => async (dispatch: Dispatch) => {

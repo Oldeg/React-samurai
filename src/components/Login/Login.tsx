@@ -6,8 +6,7 @@ import {maxLengthCreator, requiredField} from "utils/validators/validators";
 import {login} from "Redux/Reducers/authReducer";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
-import style from 'components/common/FormsControl/ProfileFormControls.module.scss'
-import s from './Login.module.css'
+import s from './Login.module.scss'
 import {AppStateType} from "Redux/redux-store";
 
 type FormDataType = {
@@ -40,7 +39,7 @@ const LoginForm: React.FC<PropsType & InjectedFormProps<FormDataType, PropsType>
 
             {props.captcha ? <img src={props.captcha} alt={''}/> : null}
             {props.captcha && createField('captcha', 'captcha', [requiredField], Input, {}, '')}
-            {props.error && <div className={style.formSummaryError}>
+            {props.error && <div>
                 {props.error}
             </div>}
             <div className={s.btnContainer}>

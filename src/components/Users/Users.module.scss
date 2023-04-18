@@ -1,0 +1,34 @@
+@import "styles/styles.module";
+
+.container {
+
+  @include container;
+}
+
+.usersBox {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 30px;
+  padding: 0 15px;
+}
+
+
+
+.message {
+  width: 100px;
+  height: 50px;
+  background-color: azure;
+}
+
+
+.preloader {
+  width: 100px;
+  height: 100px;
+  z-index: 2;
+  position: absolute;
+  top: 350px;
+  left: 750px;
+
+}

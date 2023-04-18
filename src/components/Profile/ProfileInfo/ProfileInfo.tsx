@@ -1,8 +1,8 @@
 import React, {ChangeEvent, useState} from 'react';
-import s from './ProfileInfo.module.css';
+import s from 'components/Profile/ProfileInfo/ProfileInfo.module.scss';
 import {ProfileUserType} from "Redux/Reducers/profilePageReducer";
 import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
-import {EditProfileForm, EditProfileType} from '../ProfileForm';
+import {EditProfileForm, EditProfileType} from 'components/Profile/ProfileForm/ProfileForm';
 
 
 export type KeysType = 'facebook' | 'website' | 'vk' | 'twitter' | 'instagram' | 'youtube' | 'github' | 'mainLink'
@@ -13,6 +13,7 @@ type ProfileInfoType = {
     owner: boolean
     savePhoto: (photo: File) => void
     saveProfile: (profile: EditProfileType) => void
+    display: boolean
 }
 export const ProfileInfo = (props: ProfileInfoType) => {
     const {
@@ -26,41 +27,49 @@ export const ProfileInfo = (props: ProfileInfoType) => {
             e.target.value = ''
         }
     }
-    const onSubmit =  (profile: EditProfileType) => {
+    const onSubmit = (profile: EditProfileType) => {
         props.saveProfile(profile)
         setEditMode(false)
     }
+    const profileInfoStyle = props.display ? `${s.profileInfo} ${s.profileInfoActive}` : `${s.profileInfo}`
     return (
-        <div>
+        <div className={profileInfoStyle}>
 
             {editMode ? <EditProfileForm onSubmit={onSubmit} initialValues={props.profile}/> :
                 < div className={s.descriptionBlock}>
                     < img
-                        src={props.profile.photos.large} alt="ava"/>
-                    {props.owner && <input type="file" onChange={uploadPhoto}/>
-                    }
-                    <div>
-                        Full name: {fullName}
-                    </div>
-                    <div>
-                        Looking for a job: {lookingForAJob ? 'yes' : 'no'}
-                    </div>
+                        src={props.profile.photos.large} alt="ava" className={s.avatar}/>
+                    {props.owner && <label className={s.uploadBtn}>
+                        <input type="file" onChange={uploadPhoto} className={s.input}
+                               accept=".jpg,.png,.svg,.jpeg"/>
+                    </label>}
+                    <div className={s.userInfo}>
+                        <div>
+                            <span className={s.title}>Full name</span>
+                            : {fullName}
+                        </div>
+                        <div>
+                            <span className={s.title}>Looking for a job</span>: {lookingForAJob ? 'yes' : 'no'}
+                        </div>
 
-                    <div>
-                        My professional skills: {lookingForAJobDescription}
-                    </div>
+                        <div>
+                            <span className={s.title}>My professional skills</span>: {lookingForAJobDescription}
+                        </div>
 
-                    <div>
-                        About me: {aboutMe}
+                        <div>
+                            <span className={s.title}>About me</span>: {aboutMe}
+                        </div>
+                        <div>
+                            {Object.keys(contacts).map(key => {
+                                return <div key={key}><span
+                                    className={s.title}>{key}</span> : {contacts[key as KeysType]}</div>
+                            })}
+                        </div>
+                        <ProfileStatusWithHooks status={props.status} updateUserStatus={props.updateUserStatus}/>
                     </div>
-                    <div>
-                        contacts: {Object.keys(contacts).map(key => {
-                        return <div key={key}>{key} : {contacts[key as KeysType]}</div>
-                    })}
-                    </div>
-                    <ProfileStatusWithHooks status={props.status} updateUserStatus={props.updateUserStatus}/>
-                    {props.owner && <button onClick={() => setEditMode(!editMode)}>edit</button>}
+                    {props.owner && <button onClick={() => setEditMode(!editMode)} className={s.editBtn}> edit</button>}
                 </div>
+
             }
 
         </div>

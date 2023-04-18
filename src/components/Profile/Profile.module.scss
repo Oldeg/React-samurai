@@ -1,5 +1,9 @@
 @import "styles/styles.module.scss";
 
+.profile {
+  position: relative;
+}
+
 .profileBanner {
   height: 400px;
   background-image: url("../../assets/images/profile-banner-big.webp");

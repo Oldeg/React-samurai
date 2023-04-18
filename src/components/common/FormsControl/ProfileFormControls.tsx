@@ -1,5 +1,5 @@
 import React, {HTMLInputTypeAttribute} from 'react';
-import s from 'components/common/FormsControl/ProfileFormControls.module.scss'
+import s from './ProfileFormControls.module.scss'
 import {Field, WrappedFieldInputProps, WrappedFieldMetaProps} from "redux-form";
 
 type FormControlType = {
@@ -8,8 +8,7 @@ type FormControlType = {
     placeholder?: string
     type?: HTMLInputTypeAttribute
     autofocus?: boolean
-
-
+    className: string
 }
 const FormControl: React.FC<FormControlType> = ({meta, children}) => {
     const isError = meta.touched && meta.error
@@ -26,7 +25,7 @@ export const Textarea: React.FC<FormControlType> = (props) => {
 };
 export const Input: React.FC<FormControlType> = (props) => {
     const {input, meta, children, ...restProps} = props;
-    return <FormControl {...props} ><input {...input} {...restProps} className={s.input}/></FormControl>
+    return <FormControl {...props} ><input {...input} {...restProps}/></FormControl>
 };
 
 export const createField = (placeHolder: string, name: string,

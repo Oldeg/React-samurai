@@ -12,10 +12,10 @@ export const AsidePanel: FC<AsidePanelType> = ({isBanner, cards}) => {
         <div className={s.asideContent}>
             <aside className={s.widgetArea}>
                 {isBanner && <ProfileBanner/>}
-                {cards.map(card => {
+                {cards.map((card, index) => {
                     return <Card cardTitle={card.cardTitle} subTitle={card.subTitle} isLike={card.isLike}
                                  title={card.title}
-                                 isImage={card.isImage} isProfile={card.isProfile}/>
+                                 isImage={card.isImage} isProfile={card.isProfile} key={index}/>
                 })}
             </aside>
         </div>

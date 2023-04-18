@@ -1,20 +1,23 @@
 import {Dispatch} from "redux";
 import {authAPI, securityAPI} from "api/api";
-import {AppThunk} from "../redux-store";
+import {AppDispatch, AppThunk} from "../redux-store";
 import {stopSubmit} from "redux-form";
+import {getProfile, ProfileUserType} from 'Redux/Reducers/profilePageReducer';
 
 type InitialStateType = {
-    userId: null | number
-    email: null | string
-    login: null | string
+    userId: string
+    email: string
+    login: string
     isAuth: boolean
     captcha: string
+    image: string
 }
 let InitialState: InitialStateType = {
-    userId: null,
-    email: null,
-    login: null,
+    userId: '',
+    email: '',
+    login: '',
     isAuth: false,
+    image: '',
     captcha: ''
 };
 export const authReducer = (state = InitialState, action: AuthReducerType) => {
@@ -31,14 +34,15 @@ export const authReducer = (state = InitialState, action: AuthReducerType) => {
 }
 export type AuthReducerType = ReturnType<typeof setUserData> | ReturnType<typeof setCaptchaUrl>;
 
-export const setUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => {
+export const setUserData = (userId: string, email: string, login: string, isAuth: boolean, image: string) => {
     return {
         type: 'SET_USER_DATA',
         payload: {
             userId,
             email,
             login,
-            isAuth
+            isAuth,
+            image
         }
     } as const
 }
@@ -49,11 +53,13 @@ export const setCaptchaUrl = (url: string) => {
     } as const
 }
 
-export const getAuthUserData = () => async (dispatch: Dispatch) => {
+export const getAuthUserData = () => async (dispatch: AppDispatch) => {
     let data = await authAPI.authMe()
     if (data.resultCode === 0) {
         let {id, login, email} = data.data;
-        dispatch(setUserData(id, email, login, true))
+
+        const profile = await dispatch(getProfile(id))
+        dispatch(setUserData(id, email, login, true, profile.photos.small))
     }
 }
 
@@ -74,7 +80,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
 export const logOut = (): AppThunk => async (dispatch) => {
     let data = await authAPI.logout()
     if (data.resultCode === 0) {
-        dispatch(setUserData(null, null, null, false))
+        dispatch(setUserData('', '', '', false, ''))
     }
 }
 
