@@ -3,7 +3,6 @@ import 'App.module.scss';
 
 import s from 'App.module.scss'
 import {BrowserRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom';
-import {Friends} from 'components/Friends/Friends';
 import {DialogsContainer} from "components/Dialogs/DialogsContainer";
 import {UsersContainer} from "components/Users/UsersContainer";
 import {ProfileContainer1} from "components/Profile/ProfileContainer";
@@ -67,7 +66,6 @@ class App extends React.Component<AppCommonType> {
                                 <Route path="/profile/:userId?"
                                        render={() => <ProfileContainer1/>}/>
                                 <Route exact path={'/'} render={() => <HomePage/>}/>
-                                <Route path="/friends" render={() => <Friends/>}/>
                                 <Route path="/users" render={() => <UsersContainer/>}/>
                                 <Route path="/*" render={() => <div> 404 Not found</div>}/>
                             </Switch>

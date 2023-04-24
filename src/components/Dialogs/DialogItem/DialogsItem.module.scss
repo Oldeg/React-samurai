@@ -1,0 +1,26 @@
+.dialogs_item {
+  display: flex;
+  padding-left: 10px;
+  cursor: pointer;
+  transition: .4s;
+
+  &:hover {
+    background-color: var(--color-primary-base);
+    color: #fff
+  }
+}
+
+.active {
+  background-color: var(--color-primary-base);
+  color: #FFF;
+}
+
+.img {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  margin: 5px 0;
+}
+.dialogs_item_name{
+  font-weight: 600;
+}

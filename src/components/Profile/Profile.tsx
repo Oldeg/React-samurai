@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from './Profile.module.scss';
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {openPopup, ProfileUserType} from "Redux/Reducers/profilePageReducer";

@@ -1,8 +1,8 @@
 import React from 'react';
 import {UserType} from "Redux/Reducers/usersReducer";
-import s from "./User.module.scss";
+import s from "components/Users/User/User.module.scss";
 import {NavLink} from "react-router-dom";
-import userPhoto from "../../assets/images/istockphoto-1300845620-612x612.jpg";
+import userPhoto from "assets/images/istockphoto-1300845620-612x612.jpg";
 
 type UserPropsType = {
     followingInProgress: Array<number>

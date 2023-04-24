@@ -33,9 +33,6 @@ export const ProfileMenu: FC<ProfileMenuType> = ({image, popupHandler}) => {
                             <NavLink to={'/users'} className={s.link}>Users</NavLink>
                         </li>
                         <li className={s.linkWrap}>
-                            <NavLink to={'/friends'} className={s.link}>Friends</NavLink>
-                        </li>
-                        <li className={s.linkWrap}>
                             <button className={s.link}>More</button>
                         </li>
                     </ul>

@@ -1,13 +1,17 @@
 import {Dispatch} from "redux";
-import {followingAPI, usersAPI} from "../../api/api";
+import {followingAPI, usersAPI} from "api/api";
 
+export type DialogsType = {
+    [key: number]: string[]
+}
 export type InitialStateUsersType = {
     items: UserType[]
     pageSize: number
     totalCount: number
     currentPage: number
     isFetchingValue: boolean
-    followingInProgress: Array<number>
+    followingInProgress: Array<number>,
+    friends: boolean
 }
 export type UserType = {
     id: number
@@ -16,8 +20,8 @@ export type UserType = {
     followed: boolean
     uniqueUrlName: null
     photos: {
-        small: null
-        large: null
+        small: string
+        large: string
     }
 }
 
@@ -27,8 +31,8 @@ const initialState: InitialStateUsersType = {
     totalCount: 0,
     currentPage: 1,
     isFetchingValue: false,
-    followingInProgress: []
-
+    followingInProgress: [],
+    friends: false,
 }
 
 const usersReducer = (state = initialState, action: UsersReducerType): InitialStateUsersType => {
@@ -44,7 +48,10 @@ const usersReducer = (state = initialState, action: UsersReducerType): InitialSt
         }
 
         case 'SET_USERS': {
-            return {...state, items: [...action.payload.users]}
+            const users = action.payload.users.map(user => {
+                return {...user, userMessages: [], myMessages: []}
+            })
+            return {...state, items: users}
         }
 
         case "SET_CURRENT_PAGE": {

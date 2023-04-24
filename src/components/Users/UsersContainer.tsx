@@ -34,6 +34,7 @@ type MapStateToPropsType = {
     currentPage: number
     isFetchingValue: boolean
     followingInProgress: Array<number>
+    isFriends: boolean
 }
 type MapDispatchToPropsType = {
     followUnfollowFlow: (userID: number, value:boolean) => void
@@ -84,7 +85,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         totalCount: getTotalCount(state),
         currentPage: getCurrentPage(state),
         isFetchingValue: getIsFetchingValue(state),
-        followingInProgress: getFollowingInProgress(state)
+        followingInProgress: getFollowingInProgress(state),
+        isFriends: state.usersPage.friends
     }
 
 }

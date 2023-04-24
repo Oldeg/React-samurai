@@ -1,61 +1,73 @@
-import {v1} from "uuid";
-
-type DialogsType = {
-    id: string
-    name: string
-}
-type MessagesType = {
-    id: string
-    message: string
-
-
-}
 export type InitialStateMessagesPageReducerType = {
-    dialogs: Array<DialogsType>
-    messages: Array<MessagesType>
-
+    myMessages: { [key: string]: string[] }
+    userMessages: { [key: string]: string[] }
+    time: string
 }
+
 let initialState: InitialStateMessagesPageReducerType = {
-    dialogs: [
-        {id: v1(), name: 'Dimych'},
-        {id: v1(), name: 'Victor'},
-        {id: v1(), name: 'Valera'},
-        {id: v1(), name: 'Sveta'},
-        {id: v1(), name: 'Vova'},
-        {id: v1(), name: 'Nikita'},
-    ],
-    messages: [
-        {id: v1(), message: 'Hi'},
-        {id: v1(), message: 'How are you?'},
-        {id: v1(), message: 'Nice day'},
-        {id: v1(), message: 'Nice to meet you'},
-        {id: v1(), message: 'All right'},
-        {id: v1(), message: 'Cavabanga'},
-    ]
-};
+    myMessages: {},
+    userMessages: {},
+    time: '',
+}
 
 export const messagesPageReducer = (state: InitialStateMessagesPageReducerType = initialState, action: MessagesPageReducerType): InitialStateMessagesPageReducerType => {
     switch (action.type) {
 
-        case 'SEND-MESSAGE' :
+        case 'CREATE-DIALOGS': {
             return {
                 ...state,
-                messages: [...state.messages, {id: v1(), message: action.payload.value}],
+                myMessages: state.myMessages[action.payload.id] !== undefined ? {
+                    ...state.myMessages,
+                    [action.payload.id]: [...state.myMessages[action.payload.id]]
+                } : {...state.myMessages, [action.payload.id]: []},
+                userMessages: state.userMessages[action.payload.id] !== undefined ? {
+                    ...state.userMessages,
+                    [action.payload.id]: [...state.userMessages[action.payload.id]]
+                } : {...state.userMessages, [action.payload.id]: []},
             }
-    }
-    return state
-};
-export type MessagesPageReducerType  =  SendMessageACType
-type SendMessageACType = ReturnType<typeof sendMessage>
-
-export const sendMessage = (value:string) => {
-    return {
-        type: 'SEND-MESSAGE',
-        payload:{
-            value
+        }
+        case 'SET-MY-MESSAGE': {
+            return {
+                ...state, myMessages: {
+                    ...state.myMessages,
+                    [action.payload.id]: [...state.myMessages[action.payload.id], action.payload.message]
+                }
+            }
         }
 
-    } as const
-}
+        default :
+            return state
+    }
+
+};
+export type MessagesPageReducerType = SendMessageACType
+type SendMessageACType =
+    ReturnType<typeof setMyMessage>
+    | ReturnType<typeof setUserMessage>
+    | ReturnType<typeof createDialogs>
+
+
+export const setMyMessage = (message: string, id: number) => ({
+    type: 'SET-MY-MESSAGE',
+    payload: {
+        message, id
+    }
+
+} as const)
+
+export const setUserMessage = (message: string, id: number) => ({
+    type: 'SET-OTHER-MESSAGE',
+    payload: {
+        message, id
+    }
+
+} as const)
+export const createDialogs = (id: number) => ({
+    type: 'CREATE-DIALOGS',
+    payload: {
+        id
+    }
+
+} as const)
 
 export default messagesPageReducer;

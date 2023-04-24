@@ -1,7 +1,7 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../common/FormsControl/ProfileFormControls";
-import {maxLengthCreator, requiredField} from "../../utils/validators/validators";
+import {maxLengthCreator, requiredField} from "utils/validators/validators";
 export type MessageFormType = {
     newMessageBody: string
 }

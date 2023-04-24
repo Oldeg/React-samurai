@@ -1,5 +1,5 @@
 import React from 'react';
-import s from '../Dialogs.module.css';
+import s from 'components/Dialogs/Dialogs.module.scss';
 type MassagePropsType = {
     text:string
     id:string
