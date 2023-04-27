@@ -8,13 +8,17 @@ type DialogsItemPropsType = {
     id: string
     selected: boolean
     onClick: (name: string) => void
+    lastMessage: { id: number, message: string }[]
 }
 
 export const DialogsItem = (props: DialogsItemPropsType) => {
     const dialogs_item_class = props.selected ? `${s.dialogs_item} ${s.active}` : `${s.dialogs_item}`
+    console.log(props.lastMessage)
+
     const onClickHandler = () => {
         props.onClick(props.name)
     }
+
     return (
 
         <div className={dialogs_item_class} onClick={onClickHandler}>
@@ -23,7 +27,7 @@ export const DialogsItem = (props: DialogsItemPropsType) => {
 
             <div className={s.description}>
                 <span className={s.dialogs_item_name}>{props.name}</span>
-
+                <span>{}</span>
             </div>
 
         </div>

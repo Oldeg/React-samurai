@@ -6,32 +6,49 @@ import {DialogsPropsType} from "./DialogsContainer";
 import {AppStateType, useAppDispatch} from 'Redux/redux-store';
 import {requestUsers, UserType} from 'Redux/Reducers/usersReducer';
 import {useSelector} from 'react-redux';
-import {createDialogs, setMyMessage} from 'Redux/Reducers/messagesPageReducer';
+import {createDialogs, isTyping, setMessageT} from 'Redux/Reducers/messagesPageReducer';
 
 export const Dialogs = (props: DialogsPropsType) => {
+    useLayoutEffect(() => {
+        debugger
+        dispatch(requestUsers(1, 15))
+    }, [])
     const dispatch = useAppDispatch()
     const users = useSelector<AppStateType, UserType[]>(state => state.usersPage.items)
-    const myMessages = useSelector<AppStateType, { [key: string]: string[] }>(state => state.messagesPage.myMessages)
+    const myId = useSelector<AppStateType, string>(state => state.auth.userId)
+    const messages = useSelector<AppStateType, {
+        [key: string]: { id: number, message: string }[]
+    }>(state => state.messagesPage.messages)
+    const messageLoader = useSelector<AppStateType, boolean>(state => state.messagesPage.messageLoader)
+    const userMessagesState = useSelector<AppStateType, string[]>(state => state.messagesPage.userMessagesState)
     const [select, setSelect] = useState({id: 0, name: '', lastSeen: 0})
     const [value, setValue] = useState('')
-    const lastMessage = select.id !==0  && myMessages[select.id][myMessages[select.id]?.length-1]
 
-        useLayoutEffect(() => {
-            dispatch(requestUsers(1, 15))
-        }, [])
 
     const onClickHandler = (options: { id: number, name: string }) => {
         setSelect({...options, lastSeen: Math.ceil(Math.random() * 100)})
-        dispatch(createDialogs(options.id))
     }
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.currentTarget.value)
     }
-    const sendMessage = () => {
-        dispatch(setMyMessage(value, select.id))
-        setValue('')
+    const userSendMessage = () => {
+        dispatch(isTyping(true))
+        const id = setTimeout(() => {
+            dispatch(setMessageT(userMessagesState[Math.ceil(Math.random() * 10) - 1], select.id, select.id))
+            dispatch(isTyping(false))
+            clearTimeout(id)
+        }, Math.ceil(Math.random() * 10000))
+
     }
 
+    const sendMessage = () => {
+        dispatch(setMessageT(value, select.id, Number(myId)))
+        setValue('')
+        userSendMessage()
+    }
+    const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        e.key === 'Enter' && value && sendMessage()
+    }
     return (
         <div className={s.container}>
             <div className={s.dialogsContainer}>
@@ -48,6 +65,7 @@ export const Dialogs = (props: DialogsPropsType) => {
                         {users.map(user => <DialogsItem key={user.id} name={user.name} image={user.photos.large}
                                                         id={user.id.toString()}
                                                         selected={user.id === select.id}
+                                                        lastMessage={messages[user.id]}
                                                         onClick={(name: string) => onClickHandler({
                                                             id: user.id,
                                                             name
@@ -60,9 +78,19 @@ export const Dialogs = (props: DialogsPropsType) => {
                             <h3 className={s.dialog_user_name}>
                                 {select.name}
                             </h3>
-                            {select.lastSeen === 0 ? null : <p>
-                                {select.lastSeen > 59 ? 'Last seen recently' : `Last seen ${select.lastSeen} minutes ago`}
-                            </p>}
+                            {select.lastSeen === 0 ? null : messageLoader ?
+                                <div className={s.loaderWrap}>
+                                    <div className={s.loader}>
+                                        <div className={s.loader_item}></div>
+                                        <div className={s.loader_item}></div>
+                                        <div className={s.loader_item}></div>
+                                    </div>
+                                    <p>typing</p>
+                                </div>
+                                : <p>
+                                    {select.lastSeen > 59 ? 'Last seen recently' : `Last seen ${select.lastSeen} minutes ago`}
+                                </p>
+                            }
                         </div>
                     </div>}
                     {select.name === '' ? <div className={s.not_select_block}>
@@ -70,18 +98,16 @@ export const Dialogs = (props: DialogsPropsType) => {
                         </div> :
                         <div className={s.messages_main}>
 
-                            <div className={s.myMessages}>
-                                {myMessages[select.id].map((i, index) => <div
-                                    className={s.messageWrap} key={index}>
-                                    <div className={lastMessage === i ? `${s.message} ${s.lastMessage}`: `${s.message}`}>
-                                        {i}
-                                    </div>
-                                </div>)}
-                            </div>
+                            {messages[select.id].map((i, index) => <div className={s.messageWrap} key={index}>
+                                <div
+                                    className={Number(myId) === i.id ? `${s.myMessageWrap} ${s.myLastMessage}` :
+                                        ` ${s.userMessageWrap} ${s.userLastMessage}`}>
+                                    <div
+                                        className={Number(myId) === i.id ? s.message : `${s.message} ${s.userMessage}`}>{i.message}</div>
+                                </div>
+                            </div>)}
 
-                            <div className={s.userMessages}>
 
-                            </div>
                         </div>
                     }
                     {select.name === '' ? null : <div className={s.input_block}>
@@ -90,7 +116,8 @@ export const Dialogs = (props: DialogsPropsType) => {
                             <input type="text" className={s.message_input} placeholder={'Write a message...'}
                                    value={value}
                                    onChange={onChangeHandler}
-                            autoFocus={true}/>
+                                   autoFocus={true}
+                                   onKeyPress={onKeyPressHandler}/>
                         </div>
                         <div className={s.smile}/>
                         {value ? <div className={s.send} onClick={sendMessage}/> : <div className={s.microphone}/>}

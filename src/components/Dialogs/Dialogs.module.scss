@@ -113,7 +113,6 @@
 }
 
 
-
 .selectSmth {
   background-color: rgba(204, 81, 27, 0.05);
   border-radius: 20px;
@@ -211,21 +210,16 @@
 
 .messages_main {
   height: 540px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  position: relative;
   overflow: hidden;
   overflow-y: scroll;
 }
-.myMessages {
-  align-self: flex-end;
-  justify-content: flex-end;
-}
-.myMessages:last-child {
-  background-color: #dc4734;
-}
 
 .messageWrap {
+  position: relative;
+}
+
+.myMessageWrap {
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -233,22 +227,34 @@
 
 }
 
-.message {
-  padding: 7px 14px;
-  align-self: flex-end;
-  border-radius: 15px 15px 0 15px;
-  background-color: rgba(204, 81, 27, 0.05);
-  position: relative;
+.userMessageWrap {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  padding: 5px 5px 5px 14px;
 
 }
 
-.lastMessage {
+.message {
+  padding: 7px 14px;
+  border-radius: 15px 15px 0 15px;
+  background-color: rgba(204, 81, 27, 0.05);
+  position: relative;
+  word-break: break-word;
+
+}
+
+.userMessage {
+  border-radius: 15px 15px 15px 0;
+}
+
+.myLastMessage {
   &::before {
     content: '';
     width: 10px;
     height: 10px;
-    bottom: 0;
-    right: -10px;
+    bottom: 5px;
+    right: 4px;
     position: absolute;
     background-color: rgba(204, 81, 27, 0.05);
     border-radius: 0 0 4px 0;
@@ -259,9 +265,79 @@
     content: '';
     width: 20px;
     height: 20px;
-    bottom: -1px;
-    right: -20px;
+    bottom: 4px;
+    right: -6px;
     border-radius: 50%;
     background-color: var(--color-background-base);
+  }
+}
+
+.userLastMessage {
+  &::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    bottom: 5px;
+    left: 4px;
+    position: absolute;
+    background-color: rgba(204, 81, 27, 0.05);
+    border-radius: 0 0 0 4px;
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 20px;
+    bottom: 4px;
+    left: -6px;
+    border-radius: 50%;
+    background-color: var(--color-background-base);
+  }
+}
+.loaderWrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.loader {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 30px;
+  height: 20px;
+}
+
+.loader_item {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: black;
+  animation: loader_item .5s infinite alternate;
+}
+
+.loader_item:nth-child(2) {
+  animation-delay: .1s;
+}
+
+.loader_item:nth-child(3) {
+  animation-delay: .25s;
+}
+
+.loader_item:nth-child(4) {
+  animation-delay: .4s;
+}
+
+@keyframes loader_item {
+  from {
+    width: 7px;
+    height: 7px;
+    background-color: #dc4734;
+
+  }
+  to {
+    width: 4px;
+    height: 4px;
+    background-color: black;
   }
 }

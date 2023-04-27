@@ -1,5 +1,7 @@
 import {Dispatch} from "redux";
 import {followingAPI, usersAPI} from "api/api";
+import {createDialogs} from 'Redux/Reducers/messagesPageReducer';
+import {AppDispatch} from 'Redux/redux-store';
 
 export type DialogsType = {
     [key: number]: string[]
@@ -106,12 +108,16 @@ export const toggleFollowingInProgress = (isFetching: boolean, userId: number) =
 }) as const
 
 //thunks
-export const requestUsers = (page: number, pageSize: number) => async (dispatch: Dispatch<UsersReducerType>) => {
+export const requestUsers = (page: number, pageSize: number) => async (dispatch: AppDispatch) => {
     dispatch(isFetching(true))
     dispatch(setCurrentPage(page))
     let data = await usersAPI.getUsers(page, pageSize)
     dispatch(isFetching(false))
     dispatch(setUsers(data.items))
+    data.items.forEach((i: UserType) => {
+        dispatch(createDialogs(i.id))
+    })
+
     dispatch(setTotalUsersCount(data.totalCount))
 }
 export const followUnfollowFlow = (id: number, value: boolean) => async (dispatch: Dispatch) => {

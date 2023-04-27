@@ -1,13 +1,21 @@
+import {AppDispatch} from 'Redux/redux-store';
+
 export type InitialStateMessagesPageReducerType = {
-    myMessages: { [key: string]: string[] }
-    userMessages: { [key: string]: string[] }
+    messages: { [key: string]: { id: number, message: string }[] }
+    userMessagesState: string[]
     time: string
+    lastMessage: string
+    messageLoader: boolean
 }
 
 let initialState: InitialStateMessagesPageReducerType = {
-    myMessages: {},
-    userMessages: {},
+    messages: {},
+    userMessagesState: ['Hi!', 'How are you?', 'What do you do?', 'How can i help you?', 'I am fine, and you?',
+        'Was you at exhibition yesterday?', 'What your favourite dishes?', 'Do you lake animals?',
+        'My favourite film is `Matrix`', 'Bye)'],
     time: '',
+    lastMessage: '',
+    messageLoader: false
 }
 
 export const messagesPageReducer = (state: InitialStateMessagesPageReducerType = initialState, action: MessagesPageReducerType): InitialStateMessagesPageReducerType => {
@@ -16,23 +24,25 @@ export const messagesPageReducer = (state: InitialStateMessagesPageReducerType =
         case 'CREATE-DIALOGS': {
             return {
                 ...state,
-                myMessages: state.myMessages[action.payload.id] !== undefined ? {
-                    ...state.myMessages,
-                    [action.payload.id]: [...state.myMessages[action.payload.id]]
-                } : {...state.myMessages, [action.payload.id]: []},
-                userMessages: state.userMessages[action.payload.id] !== undefined ? {
-                    ...state.userMessages,
-                    [action.payload.id]: [...state.userMessages[action.payload.id]]
-                } : {...state.userMessages, [action.payload.id]: []},
+                messages: state.messages[action.payload.id] !== undefined ? {
+                    ...state.messages,
+                    [action.payload.id]: [...state.messages[action.payload.id]]
+                } : {...state.messages, [action.payload.id]: []},
             }
         }
-        case 'SET-MY-MESSAGE': {
+        case 'SET-MESSAGE': {
             return {
-                ...state, myMessages: {
-                    ...state.myMessages,
-                    [action.payload.id]: [...state.myMessages[action.payload.id], action.payload.message]
+                ...state, messages: {
+                    ...state.messages,
+                    [action.payload.id]: [...state.messages[action.payload.id], {
+                        message: action.payload.message,
+                        id: action.payload.messageId
+                    }]
                 }
             }
+        }
+        case 'IS-TYPING': {
+            return {...state, messageLoader: action.payload}
         }
 
         default :
@@ -42,26 +52,23 @@ export const messagesPageReducer = (state: InitialStateMessagesPageReducerType =
 };
 export type MessagesPageReducerType = SendMessageACType
 type SendMessageACType =
-    ReturnType<typeof setMyMessage>
-    | ReturnType<typeof setUserMessage>
+    ReturnType<typeof setMessage>
     | ReturnType<typeof createDialogs>
+    | ReturnType<typeof setLastMessage>
+    | ReturnType<typeof isTyping>
 
-
-export const setMyMessage = (message: string, id: number) => ({
-    type: 'SET-MY-MESSAGE',
+export const setMessageT = (message: string, id: number, messageId: number) => (dispatch: AppDispatch) => {
+    dispatch(setMessage(message, id, messageId))
+    dispatch(setLastMessage(message))
+}
+export const setMessage = (message: string, id: number, messageId: number) => ({
+    type: 'SET-MESSAGE',
     payload: {
-        message, id
+        message, id, messageId
     }
 
 } as const)
 
-export const setUserMessage = (message: string, id: number) => ({
-    type: 'SET-OTHER-MESSAGE',
-    payload: {
-        message, id
-    }
-
-} as const)
 export const createDialogs = (id: number) => ({
     type: 'CREATE-DIALOGS',
     payload: {
@@ -70,4 +77,17 @@ export const createDialogs = (id: number) => ({
 
 } as const)
 
+export const setLastMessage = (message: string) => ({
+    type: 'SET-LAST-MESSAGE',
+    payload: {
+        message
+    }
+
+} as const)
+export const isTyping = (typing: boolean) => ({
+    type: 'IS-TYPING',
+    payload: typing
+
+
+} as const)
 export default messagesPageReducer;
