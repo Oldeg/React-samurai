@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/React-samurai/static/css/main.4de72bc5.css",
-    "main.js": "/React-samurai/static/js/main.f4e8abfc.js",
+    "main.css": "/React-samurai/static/css/main.fb0aabf7.css",
+    "main.js": "/React-samurai/static/js/main.de510482.js",
     "static/media/animals.webp": "/React-samurai/static/media/animals.a3fea19c79211cac89d8.webp",
     "static/media/forest.jpg": "/React-samurai/static/media/forest.92458287a76dfdab71fe.jpg",
     "static/media/post-3.jpg": "/React-samurai/static/media/post-3.0e9b5bba4961ab36c436.jpg",
@@ -17,6 +17,12 @@
     "static/media/banner-ava.webp": "/React-samurai/static/media/banner-ava.d039b5fe05e5f0950025.webp",
     "static/media/upload-base.svg": "/React-samurai/static/media/upload-base.b48b6103dcf41e6a42bc.svg",
     "static/media/upload.svg": "/React-samurai/static/media/upload.749a5a31517dbb3e550f.svg",
+    "static/media/exit-hover.svg": "/React-samurai/static/media/exit-hover.cb6e30a3bdbe7ce66f2d.svg",
+    "static/media/exit.svg": "/React-samurai/static/media/exit.4eebf00153ae67b0ba88.svg",
+    "static/media/smile-base.svg": "/React-samurai/static/media/smile-base.abad2c6995828306df4b.svg",
+    "static/media/smile.svg": "/React-samurai/static/media/smile.8327d655b12cb75f5742.svg",
+    "static/media/clip.svg": "/React-samurai/static/media/clip.1d52f788688f43ca9a53.svg",
+    "static/media/clip-base.svg": "/React-samurai/static/media/clip-base.84527e2925e150c99c4f.svg",
     "static/media/check-mark.svg": "/React-samurai/static/media/check-mark.a3b3d5af1aa545012ae9.svg",
     "static/media/ava-1.webp": "/React-samurai/static/media/ava-1.137bae97a2d10dd83793.webp",
     "static/media/ava-4.webp": "/React-samurai/static/media/ava-4.4a20df2f1d65811122e0.webp",
@@ -24,13 +30,19 @@
     "static/media/ava-2.webp": "/React-samurai/static/media/ava-2.04c17dfc250454e1021c.webp",
     "index.html": "/React-samurai/index.html",
     "static/media/logo.webp": "/React-samurai/static/media/logo.a7dd637e4d5ad2560669.webp",
+    "static/media/microphone-base.svg": "/React-samurai/static/media/microphone-base.4a1155b637f03721641d.svg",
+    "static/media/microphone.svg": "/React-samurai/static/media/microphone.f215bd950eac7aca3efb.svg",
     "static/media/heart-color.webp": "/React-samurai/static/media/heart-color.967912bffab0ae3303a1.webp",
+    "static/media/ulpoadBtn-base.svg": "/React-samurai/static/media/ulpoadBtn-base.a301c869bc83ffed5254.svg",
+    "static/media/ulpoadBtn.svg": "/React-samurai/static/media/ulpoadBtn.4ab2b8b50b1d5662a5ac.svg",
+    "static/media/send-base.svg": "/React-samurai/static/media/send-base.924c345565c39fe5559e.svg",
+    "static/media/send.svg": "/React-samurai/static/media/send.c962dc377566b22f1674.svg",
     "static/media/heart.webp": "/React-samurai/static/media/heart.7199c3f0c6ed0eb9cf08.webp",
-    "main.4de72bc5.css.map": "/React-samurai/static/css/main.4de72bc5.css.map",
-    "main.f4e8abfc.js.map": "/React-samurai/static/js/main.f4e8abfc.js.map"
+    "main.fb0aabf7.css.map": "/React-samurai/static/css/main.fb0aabf7.css.map",
+    "main.de510482.js.map": "/React-samurai/static/js/main.de510482.js.map"
   },
   "entrypoints": [
-    "static/css/main.4de72bc5.css",
-    "static/js/main.f4e8abfc.js"
+    "static/css/main.fb0aabf7.css",
+    "static/js/main.de510482.js"
   ]
 }
