@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/React-samurai/static/css/main.fb0aabf7.css",
-    "main.js": "/React-samurai/static/js/main.de510482.js",
+    "main.js": "/React-samurai/static/js/main.2389a2c0.js",
     "static/media/animals.webp": "/React-samurai/static/media/animals.a3fea19c79211cac89d8.webp",
     "static/media/forest.jpg": "/React-samurai/static/media/forest.92458287a76dfdab71fe.jpg",
     "static/media/post-3.jpg": "/React-samurai/static/media/post-3.0e9b5bba4961ab36c436.jpg",
@@ -14,7 +14,6 @@
     "static/media/istockphoto-1300845620-612x612.jpg": "/React-samurai/static/media/istockphoto-1300845620-612x612.8e7ab55da0bc52271ed8.jpg",
     "static/media/advertise.webp": "/React-samurai/static/media/advertise.2f60101349e0007b079a.webp",
     "static/media/profile-banner.webp": "/React-samurai/static/media/profile-banner.76286a5f9f85658c0e2f.webp",
-    "static/media/banner-ava.webp": "/React-samurai/static/media/banner-ava.d039b5fe05e5f0950025.webp",
     "static/media/upload-base.svg": "/React-samurai/static/media/upload-base.b48b6103dcf41e6a42bc.svg",
     "static/media/upload.svg": "/React-samurai/static/media/upload.749a5a31517dbb3e550f.svg",
     "static/media/exit-hover.svg": "/React-samurai/static/media/exit-hover.cb6e30a3bdbe7ce66f2d.svg",
@@ -39,10 +38,10 @@
     "static/media/send.svg": "/React-samurai/static/media/send.c962dc377566b22f1674.svg",
     "static/media/heart.webp": "/React-samurai/static/media/heart.7199c3f0c6ed0eb9cf08.webp",
     "main.fb0aabf7.css.map": "/React-samurai/static/css/main.fb0aabf7.css.map",
-    "main.de510482.js.map": "/React-samurai/static/js/main.de510482.js.map"
+    "main.2389a2c0.js.map": "/React-samurai/static/js/main.2389a2c0.js.map"
   },
   "entrypoints": [
     "static/css/main.fb0aabf7.css",
-    "static/js/main.de510482.js"
+    "static/js/main.2389a2c0.js"
   ]
 }
